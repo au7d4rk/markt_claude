@@ -1,0 +1,5 @@
+faktor,wert,stand,quelle
+T10Y3M,0.67,2026-11-06,FRED (fred.stlouisfed.org/series/T10Y3M)
+SAHM,0.00,2026-09,FRED (fred.stlouisfed.org/series/SAHMREALTIME)
+ISM,55.5,2026-10,ISM Manufacturing PMI laut TrendForce-Bericht vom 03.11.2026
+CAPE,38.91,2026-11-06,multpl.com/shiller-pe

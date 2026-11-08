@@ -1,0 +1,13 @@
+asset,name,klasse,risiko,vol_lang,aufschlag_kauf,abschlag_verkauf,produkt
+LINK,Chainlink,krypto,5,0.75,0.0199,0.0199,Krypto-Sparplan
+ADA,Cardano,krypto,5,0.77,0.0199,0.0199,Krypto-Sparplan
+AVAX,Avalanche,krypto,5,0.79,0.0199,0.0199,Krypto-Sparplan
+SUI,Sui,krypto,5,0.87,0.0299,0.0299,Krypto-Sparplan
+PEPE,Pepe (Memecoin),krypto,5,1.3,0.0299,0.0299,Krypto-Sparplan
+NDX,Nasdaq-100-ETF,aktie,3,0.22,0.005,0.005,"ETF-Sparplan, z. B. auf den Nasdaq 100"
+EM,Schwellenländer-ETF,aktie,4,0.18,0.005,0.005,"ETF-Sparplan, z. B. auf MSCI Emerging Markets"
+NVDA,Nvidia (Einzelaktie),aktie,4,0.45,0.005,0.005,Aktie in Bruchteilen
+TSLA,Tesla (Einzelaktie),aktie,4,0.56,0.005,0.005,Aktie in Bruchteilen
+COIN,Coinbase (Einzelaktie),aktie,5,0.72,0.005,0.005,Aktie in Bruchteilen
+BCI,Krypto-Index (Top 10),krypto,4,0.65,0.0199,0.0199,Krypto-Index-Sparplan
+CHN,China-ETF (MSCI China),aktie,4,0.23,0.005,0.005,"ETF-Sparplan, z. B. auf den MSCI China"
