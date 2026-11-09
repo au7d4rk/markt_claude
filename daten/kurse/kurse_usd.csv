@@ -2499,7 +2499,8 @@ date,asset,close,open,high,low,status
 2026-11-02,BTC,76677,,,,final
 2026-11-04,BTC,80405,,,,final
 2026-11-05,BTC,75942,,,,final
-2026-11-07,BTC,75926,,,,zwischenstand
+2026-11-07,BTC,75748,,,,final
+2026-11-08,BTC,75619,,,,zwischenstand
 2020-01-01,DOGE,0.002019,0.002013,0.002106,0.001942,final
 2020-01-02,DOGE,0.001954,0.002017,0.002092,0.001945,final
 2020-01-03,DOGE,0.002046,0.001954,0.002092,0.001933,final
@@ -5001,8 +5002,9 @@ date,asset,close,open,high,low,status
 2026-11-03,DOGE,0.0752,,,,final
 2026-11-04,DOGE,0.0771,,,,final
 2026-11-05,DOGE,0.0711,,,,final
-2026-11-06,DOGE,0.0727,,,,zwischenstand
-2026-11-07,DOGE,0.07197,,,,zwischenstand
+2026-11-06,DOGE,0.07234,,,,final
+2026-11-07,DOGE,0.071513,,,,final
+2026-11-08,DOGE,0.0708,,,,zwischenstand
 2020-01-01,ETH,130.35,128.79,132.9,128.51,final
 2020-01-02,ETH,127.53,130.32,130.68,126.58,final
 2020-01-03,ETH,133.19,127.53,134.83,126.01,final
@@ -7503,7 +7505,8 @@ date,asset,close,open,high,low,status
 2026-11-02,ETH,2248.9,,,,final
 2026-11-04,ETH,2422.3,,,,final
 2026-11-05,ETH,2234.5,,,,final
-2026-11-07,ETH,2245.6,,,,zwischenstand
+2026-11-07,ETH,2236.3,,,,final
+2026-11-08,ETH,2223.5,,,,zwischenstand
 2020-01-02,GOLD,1536.030389,1525.010957,1538.220212,1524.157127,final
 2020-01-03,GOLD,1555.999969,1536.050479,1560.399706,1534.935477,final
 2020-01-06,GOLD,1572.79531,1567.612059,1593.910028,1567.612059,final
@@ -15213,7 +15216,8 @@ date,asset,close,open,high,low,status
 2026-11-02,SOL,91.84,,,,final
 2026-11-04,SOL,95.488,,,,final
 2026-11-05,SOL,89.143,,,,final
-2026-11-07,SOL,90.18,,,,zwischenstand
+2026-11-07,SOL,89.669,,,,final
+2026-11-08,SOL,88.85,,,,zwischenstand
 2020-01-02,SPX,3257.85,,,,final
 2020-01-03,SPX,3234.85,,,,final
 2020-01-06,SPX,3246.28,,,,final
@@ -19433,4 +19437,5 @@ date,asset,close,open,high,low,status
 2026-11-02,XRP,1.25,,,,final
 2026-11-04,XRP,1.3047,,,,final
 2026-11-05,XRP,1.206,,,,final
-2026-11-07,XRP,1.1608,,,,zwischenstand
+2026-11-07,XRP,1.162,,,,final
+2026-11-08,XRP,1.1532,,,,zwischenstand

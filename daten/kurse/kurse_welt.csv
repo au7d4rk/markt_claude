@@ -66,6 +66,7 @@ date,asset,close,open,high,low,status
 2026-11-03,EBS,107.2,,,,final
 2026-11-04,EBS,110.9,,,,final
 2026-11-05,EBS,112.4,,,,final
+2026-11-06,EBS,111.5,,,,final
 2026-08-17,OMV,66.10,65.65,66.10,65.30,final
 2026-08-18,OMV,67.55,66.50,67.55,66.50,final
 2026-08-19,OMV,68.55,67.65,68.55,67.50,final
@@ -124,6 +125,7 @@ date,asset,close,open,high,low,status
 2026-11-03,OMV,72.9,,,,final
 2026-11-04,OMV,72.4,,,,final
 2026-11-05,OMV,72.75,,,,final
+2026-11-06,OMV,71.75,,,,final
 2026-08-07,VER,57.85,58.80,58.80,57.85,final
 2026-08-10,VER,57.90,58.00,58.35,57.80,final
 2026-08-11,VER,57.00,58.00,58.65,57.00,final
@@ -188,6 +190,7 @@ date,asset,close,open,high,low,status
 2026-11-03,VER,69.5,,,,final
 2026-11-04,VER,69.4,,,,final
 2026-11-05,VER,75.35,,,,final
+2026-11-06,VER,72.7,,,,final
 2026-10-28,RBI,55.80,,,,final
 2026-10-29,RBI,57.10,,,,final
 2026-10-30,RBI,56.30,,,,final
@@ -249,6 +252,7 @@ date,asset,close,open,high,low,status
 2026-11-03,ANDR,81.4,,,,final
 2026-11-04,ANDR,81.9,,,,final
 2026-11-05,ANDR,82.5,,,,final
+2026-11-06,ANDR,81.8,,,,final
 2026-08-04,WIE,22.26,22.00,22.34,21.78,final
 2026-08-05,WIE,22.44,22.40,22.44,22.04,final
 2026-08-06,WIE,22.24,22.44,22.70,22.24,final
@@ -316,6 +320,7 @@ date,asset,close,open,high,low,status
 2026-11-03,WIE,17.02,,,,final
 2026-11-04,WIE,17.41,,,,final
 2026-11-05,WIE,17.77,,,,final
+2026-11-06,WIE,17.34,,,,final
 2026-09-28,N225,65877.62,66505.94,67034.74,65877.62,final
 2026-09-29,N225,65481.27,65557.99,65805.08,64699.49,final
 2026-09-30,N225,66753.72,66128.59,66946.14,66014.48,final
@@ -463,6 +468,7 @@ date,asset,close,open,high,low,status
 2026-11-04,NIFTY,23961,,,,final
 2026-11-05,NIFTY,24537,,,,final
 2026-11-06,NIFTY,25030,,,,final
+2026-11-08,NIFTY,24986,,,,zwischenstand
 2026-08-17,TSM,430.97,429.97,435.71,426.80,final
 2026-08-18,TSM,413.41,417.00,419.63,410.77,final
 2026-08-19,TSM,412.09,418.13,419.60,407.88,final
@@ -1002,6 +1008,7 @@ date,asset,close,open,high,low,status
 2026-11-03,SAP,206.65,,,,final
 2026-11-04,SAP,214.3,,,,final
 2026-11-05,SAP,215.75,,,,final
+2026-11-06,SAP,210.75,,,,final
 2026-08-18,LVMH,447.75,444.60,449.75,444.15,final
 2026-08-19,LVMH,456.00,447.80,457.10,446.85,final
 2026-08-20,LVMH,443.10,453.00,455.40,443.10,final
@@ -1170,6 +1177,7 @@ date,asset,close,open,high,low,status
 2026-11-03,ALV,440.9,,,,final
 2026-11-04,ALV,458.4,,,,final
 2026-11-05,ALV,465.1,,,,final
+2026-11-06,ALV,451.1,,,,final
 2026-08-17,NESN,78.71,80.25,80.45,78.71,final
 2026-08-18,NESN,79.20,78.71,79.27,78.36,final
 2026-08-19,NESN,79.34,79.18,79.60,78.88,final
@@ -1920,8 +1928,9 @@ date,asset,close,open,high,low,status
 2026-11-03,DOT,0.94043,,,,final
 2026-11-04,DOT,0.938,,,,final
 2026-11-05,DOT,0.909,,,,final
-2026-11-06,DOT,0.918,,,,zwischenstand
-2026-11-07,DOT,0.9087,,,,zwischenstand
+2026-11-06,DOT,0.91227,,,,final
+2026-11-07,DOT,0.89688,,,,final
+2026-11-08,DOT,0.8818,,,,zwischenstand
 2026-09-08,LTC,54.32,,,,final
 2026-09-09,LTC,53.25,,,,final
 2026-09-10,LTC,52.15,,,,final
@@ -1981,8 +1990,9 @@ date,asset,close,open,high,low,status
 2026-11-03,LTC,54.46,,,,final
 2026-11-04,LTC,56.35,,,,final
 2026-11-05,LTC,51.71,,,,final
-2026-11-06,LTC,52.89,,,,zwischenstand
-2026-11-07,LTC,52.52,,,,zwischenstand
+2026-11-06,LTC,52.536,,,,final
+2026-11-07,LTC,52.106,,,,final
+2026-11-08,LTC,51.408,,,,zwischenstand
 2026-09-04,TON,1.39,,,,final
 2026-09-05,TON,1.43,,,,final
 2026-09-06,TON,1.43,,,,final
@@ -2046,7 +2056,8 @@ date,asset,close,open,high,low,status
 2026-11-04,TON,1.18,,,,final
 2026-11-05,TON,1.18,,,,final
 2026-11-06,TON,1.1,,,,final
-2026-11-07,TON,1.108,,,,zwischenstand
+2026-11-07,TON,1.068,,,,final
+2026-11-08,TON,1.047,,,,zwischenstand
 2026-09-07,TRX,0.335,,,,final
 2026-09-08,TRX,0.339,,,,final
 2026-09-09,TRX,0.339,,,,final
@@ -2164,8 +2175,9 @@ date,asset,close,open,high,low,status
 2026-11-02,SUI,0.87204,,,,final
 2026-11-04,SUI,0.957,,,,final
 2026-11-05,SUI,0.881,,,,final
-2026-11-06,SUI,0.871,,,,zwischenstand
-2026-11-07,SUI,0.8688,,,,zwischenstand
+2026-11-06,SUI,0.86796,,,,final
+2026-11-07,SUI,0.85584,,,,final
+2026-11-08,SUI,0.8408,,,,zwischenstand
 2026-09-08,SHIB,0.00000541,,,,final
 2026-09-09,SHIB,0.00000526,,,,final
 2026-09-10,SHIB,0.00000504,,,,final
