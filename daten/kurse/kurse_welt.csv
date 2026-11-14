@@ -9,6 +9,7 @@ date,asset,close,open,high,low,status
 2026-11-09,ATX,6562.5,,,,final
 2026-11-10,ATX,6650.5,,,,final
 2026-11-11,ATX,6738.9,,,,final
+2026-11-12,ATX,6685.9,,,,final
 2026-08-13,EBS,122.60,122.50,124.10,122.10,final
 2026-08-14,EBS,122.60,123.30,123.30,121.90,final
 2026-08-17,EBS,122.30,122.60,123.10,122.10,final
@@ -72,6 +73,7 @@ date,asset,close,open,high,low,status
 2026-11-06,EBS,111.5,,,,final
 2026-11-09,EBS,114.6,,,,final
 2026-11-10,EBS,117.7,,,,final
+2026-11-11,EBS,118,,,,final
 2026-08-17,OMV,66.10,65.65,66.10,65.30,final
 2026-08-18,OMV,67.55,66.50,67.55,66.50,final
 2026-08-19,OMV,68.55,67.65,68.55,67.50,final
@@ -133,6 +135,7 @@ date,asset,close,open,high,low,status
 2026-11-06,OMV,71.75,,,,final
 2026-11-09,OMV,71.3,,,,final
 2026-11-10,OMV,70.25,,,,final
+2026-11-11,OMV,72.05,,,,final
 2026-08-07,VER,57.85,58.80,58.80,57.85,final
 2026-08-10,VER,57.90,58.00,58.35,57.80,final
 2026-08-11,VER,57.00,58.00,58.65,57.00,final
@@ -200,6 +203,7 @@ date,asset,close,open,high,low,status
 2026-11-06,VER,72.7,,,,final
 2026-11-09,VER,71.15,,,,final
 2026-11-10,VER,72.4,,,,final
+2026-11-11,VER,73.05,,,,final
 2026-10-28,RBI,55.80,,,,final
 2026-10-29,RBI,57.10,,,,final
 2026-10-30,RBI,56.30,,,,final
@@ -266,6 +270,7 @@ date,asset,close,open,high,low,status
 2026-11-06,ANDR,81.8,,,,final
 2026-11-09,ANDR,82.6,,,,final
 2026-11-10,ANDR,83.2,,,,final
+2026-11-11,ANDR,85.6,,,,final
 2026-08-04,WIE,22.26,22.00,22.34,21.78,final
 2026-08-05,WIE,22.44,22.40,22.44,22.04,final
 2026-08-06,WIE,22.24,22.44,22.70,22.24,final
@@ -336,6 +341,7 @@ date,asset,close,open,high,low,status
 2026-11-06,WIE,17.34,,,,final
 2026-11-09,WIE,17.85,,,,final
 2026-11-10,WIE,17.87,,,,final
+2026-11-11,WIE,17.2,,,,final
 2026-09-28,N225,65877.62,66505.94,67034.74,65877.62,final
 2026-09-29,N225,65481.27,65557.99,65805.08,64699.49,final
 2026-09-30,N225,66753.72,66128.59,66946.14,66014.48,final
@@ -368,7 +374,8 @@ date,asset,close,open,high,low,status
 2026-11-09,N225,58776,,,,final
 2026-11-10,N225,60460,,,,final
 2026-11-11,N225,61249,,,,final
-2026-11-12,N225,60644,,,,zwischenstand
+2026-11-12,N225,60819,,,,final
+2026-11-13,N225,61181,,,,zwischenstand
 2026-09-28,HSI,24642.51,24554.58,24767.22,24554.58,final
 2026-09-29,HSI,24523.57,24648.64,24648.64,24444.15,final
 2026-09-30,HSI,24613.27,24393.88,24637.65,24332.64,final
@@ -400,7 +407,8 @@ date,asset,close,open,high,low,status
 2026-11-09,HSI,24449,,,,final
 2026-11-10,HSI,24557,,,,final
 2026-11-11,HSI,24316,,,,final
-2026-11-12,HSI,24061,,,,zwischenstand
+2026-11-12,HSI,24009,,,,final
+2026-11-13,HSI,23653,,,,zwischenstand
 2026-09-03,SSEC,3942.09,3952.79,3968.11,3930.45,final
 2026-09-04,SSEC,3930.12,3955.55,3980.20,3915.22,final
 2026-09-07,SSEC,3932.70,3942.51,3948.42,3916.49,final
@@ -445,7 +453,8 @@ date,asset,close,open,high,low,status
 2026-11-09,SSEC,3660.8,,,,final
 2026-11-10,SSEC,3663.7,,,,final
 2026-11-11,SSEC,3680.6,,,,final
-2026-11-12,SSEC,3660.3,,,,zwischenstand
+2026-11-12,SSEC,3655.8,,,,final
+2026-11-13,SSEC,3639.9,,,,zwischenstand
 2026-09-22,KOSPI,7017.91,7161.61,7171.44,6986.27,final
 2026-09-23,KOSPI,7080.92,7153.99,7153.99,7014.98,final
 2026-09-28,KOSPI,6889.74,7057.86,7065.90,6889.68,final
@@ -498,7 +507,8 @@ date,asset,close,open,high,low,status
 2026-11-08,NIFTY,24986,,,,zwischenstand
 2026-11-09,NIFTY,25045,,,,final
 2026-11-11,NIFTY,25255,,,,final
-2026-11-12,NIFTY,25281,,,,zwischenstand
+2026-11-12,NIFTY,25299,,,,final
+2026-11-13,NIFTY,25164,,,,zwischenstand
 2026-08-17,TSM,430.97,429.97,435.71,426.80,final
 2026-08-18,TSM,413.41,417.00,419.63,410.77,final
 2026-08-19,TSM,412.09,418.13,419.60,407.88,final
@@ -561,6 +571,7 @@ date,asset,close,open,high,low,status
 2026-11-09,TSM,388.62,,,,final
 2026-11-10,TSM,396.48,,,,final
 2026-11-11,TSM,413.35,,,,final
+2026-11-12,TSM,405.49,,,,final
 2026-08-10,TOYOTA,2981.00,2989.50,2989.50,2939.50,final
 2026-08-12,TOYOTA,2999.50,3010.00,3027.00,2981.00,final
 2026-08-13,TOYOTA,2985.00,3010.00,3020.00,2968.00,final
@@ -727,7 +738,8 @@ date,asset,close,open,high,low,status
 2026-11-09,TENCENT,418.4,,,,final
 2026-11-10,TENCENT,417.8,,,,final
 2026-11-11,TENCENT,409.6,,,,final
-2026-11-12,TENCENT,404.4,,,,zwischenstand
+2026-11-12,TENCENT,398.8,,,,final
+2026-11-13,TENCENT,386.6,,,,zwischenstand
 2026-08-18,BABA,128.15,127.76,128.79,126.34,final
 2026-08-19,BABA,128.90,127.77,129.50,127.54,final
 2026-08-20,BABA,130.53,123.47,130.62,121.88,final
@@ -789,6 +801,7 @@ date,asset,close,open,high,low,status
 2026-11-09,BABA,105.38,,,,final
 2026-11-10,BABA,102.72,,,,final
 2026-11-11,BABA,101.52,,,,final
+2026-11-12,BABA,94.36,,,,final
 2026-08-10,SONY,3764.00,3707.00,3801.00,3650.00,final
 2026-08-12,SONY,3762.00,3790.00,3809.00,3726.00,final
 2026-08-13,SONY,3700.00,3758.00,3759.00,3671.00,final
@@ -872,6 +885,7 @@ date,asset,close,open,high,low,status
 2026-11-09,SX5E,6290.5,,,,final
 2026-11-10,SX5E,6327.9,,,,final
 2026-11-11,SX5E,6393.4,,,,final
+2026-11-12,SX5E,6399,,,,final
 2026-09-28,FTSE,10684.88,10695.19,10758.74,10684.88,final
 2026-09-29,FTSE,10636.71,10685.19,10756.15,10622.00,final
 2026-09-30,FTSE,10606.00,10635.82,10725.31,10599.21,final
@@ -1054,6 +1068,7 @@ date,asset,close,open,high,low,status
 2026-11-06,SAP,210.75,,,,final
 2026-11-09,SAP,211.65,,,,final
 2026-11-10,SAP,209.95,,,,final
+2026-11-11,SAP,210.95,,,,final
 2026-08-18,LVMH,447.75,444.60,449.75,444.15,final
 2026-08-19,LVMH,456.00,447.80,457.10,446.85,final
 2026-08-20,LVMH,443.10,453.00,455.40,443.10,final
@@ -1225,6 +1240,7 @@ date,asset,close,open,high,low,status
 2026-11-06,ALV,451.1,,,,final
 2026-11-09,ALV,457,,,,final
 2026-11-10,ALV,463.5,,,,final
+2026-11-11,ALV,463.6,,,,final
 2026-08-17,NESN,78.71,80.25,80.45,78.71,final
 2026-08-18,NESN,79.20,78.71,79.27,78.36,final
 2026-08-19,NESN,79.34,79.18,79.60,78.88,final
@@ -1406,6 +1422,7 @@ date,asset,close,open,high,low,status
 2026-11-09,RUT,2840.8,,,,final
 2026-11-10,RUT,2821.4,,,,final
 2026-11-11,RUT,2846.3,,,,final
+2026-11-12,RUT,2799.1,,,,final
 2026-08-18,TSLA,336.87,333.22,340.53,331.12,final
 2026-08-19,TSLA,351.12,338.89,351.62,335.70,final
 2026-08-20,TSLA,345.13,346.20,347.50,338.96,final
@@ -1467,6 +1484,7 @@ date,asset,close,open,high,low,status
 2026-11-09,TSLA,378.05,,,,final
 2026-11-10,TSLA,379.78,,,,final
 2026-11-11,TSLA,390.84,,,,final
+2026-11-12,TSLA,397.45,,,,final
 2026-08-18,META,543.67,557.48,560.66,543.21,final
 2026-08-19,META,546.03,541.34,554.07,537.27,final
 2026-08-20,META,545.83,546.95,549.99,539.31,final
@@ -1528,6 +1546,7 @@ date,asset,close,open,high,low,status
 2026-11-09,META,641.37,,,,final
 2026-11-10,META,641.39,,,,final
 2026-11-11,META,628.77,,,,final
+2026-11-12,META,623.61,,,,final
 2026-08-17,BRKB,498.23,504.45,505.31,498.07,final
 2026-08-18,BRKB,502.96,501.04,504.50,499.60,final
 2026-08-19,BRKB,499.62,503.41,507.07,499.41,final
@@ -1698,6 +1717,7 @@ date,asset,close,open,high,low,status
 2026-11-09,LLY,1411.9,,,,final
 2026-11-10,LLY,1432.3,,,,final
 2026-11-11,LLY,1437.3,,,,final
+2026-11-12,LLY,1427.3,,,,final
 2026-08-18,V,364.25,359.62,365.91,358.05,final
 2026-08-19,V,365.54,364.09,370.64,362.90,final
 2026-08-20,V,365.73,365.10,368.93,363.63,final
@@ -1849,7 +1869,8 @@ date,asset,close,open,high,low,status
 2026-11-09,WTI,86.85,,,,final
 2026-11-10,WTI,86.04,,,,final
 2026-11-11,WTI,86.53,,,,final
-2026-11-12,WTI,85.56,,,,zwischenstand
+2026-11-12,WTI,88.74,,,,final
+2026-11-13,WTI,88.28,,,,zwischenstand
 2026-09-28,BRENT,99.78,100.00,103.33,98.26,final
 2026-09-29,BRENT,97.09,100.41,102.37,96.80,final
 2026-09-30,BRENT,98.03,95.73,99.30,95.12,final
@@ -1907,7 +1928,8 @@ date,asset,close,open,high,low,status
 2026-11-09,ERDGAS,3.218,,,,final
 2026-11-10,ERDGAS,3.296,,,,final
 2026-11-11,ERDGAS,3.215,,,,final
-2026-11-12,ERDGAS,3.25,,,,zwischenstand
+2026-11-12,ERDGAS,3.34,,,,final
+2026-11-13,ERDGAS,3.309,,,,zwischenstand
 2026-09-28,KUPFER,6.6335,6.7675,6.7730,6.5955,final
 2026-09-29,KUPFER,6.6035,6.6140,6.6650,6.5795,final
 2026-09-30,KUPFER,6.6215,6.6540,6.6915,6.6025,final
@@ -1941,7 +1963,8 @@ date,asset,close,open,high,low,status
 2026-11-09,KUPFER,6.3285,,,,final
 2026-11-10,KUPFER,6.2195,,,,final
 2026-11-11,KUPFER,6.2745,,,,final
-2026-11-12,KUPFER,6.226,,,,zwischenstand
+2026-11-12,KUPFER,6.1825,,,,final
+2026-11-13,KUPFER,6.1625,,,,zwischenstand
 2026-09-28,WEIZEN,688.75,703.00,703.00,683.00,final
 2026-09-29,WEIZEN,692.75,689.50,694.00,681.50,final
 2026-09-30,WEIZEN,675.75,692.75,700.25,673.25,final
@@ -2028,8 +2051,9 @@ date,asset,close,open,high,low,status
 2026-11-08,DOT,0.86012,,,,final
 2026-11-09,DOT,0.85484,,,,final
 2026-11-10,DOT,0.84257,,,,final
-2026-11-11,DOT,0.8435,,,,zwischenstand
+2026-11-11,DOT,0.84066,,,,final
 2026-11-12,DOT,0.8419,,,,zwischenstand
+2026-11-13,DOT,0.8071,,,,zwischenstand
 2026-09-08,LTC,54.32,,,,final
 2026-09-09,LTC,53.25,,,,final
 2026-09-10,LTC,52.15,,,,final
@@ -2094,8 +2118,9 @@ date,asset,close,open,high,low,status
 2026-11-08,LTC,50.011,,,,final
 2026-11-09,LTC,51.3,,,,final
 2026-11-10,LTC,50.678,,,,final
-2026-11-11,LTC,51.03,,,,zwischenstand
+2026-11-11,LTC,50.238,,,,final
 2026-11-12,LTC,49.501,,,,zwischenstand
+2026-11-13,LTC,48.1,,,,zwischenstand
 2026-09-04,TON,1.39,,,,final
 2026-09-05,TON,1.43,,,,final
 2026-09-06,TON,1.43,,,,final
@@ -2164,7 +2189,8 @@ date,asset,close,open,high,low,status
 2026-11-09,TON,1.039,,,,final
 2026-11-10,TON,1.14,,,,final
 2026-11-11,TON,1.174,,,,final
-2026-11-12,TON,1.186,,,,zwischenstand
+2026-11-12,TON,1.139,,,,final
+2026-11-13,TON,1.135,,,,zwischenstand
 2026-09-07,TRX,0.335,,,,final
 2026-09-08,TRX,0.339,,,,final
 2026-09-09,TRX,0.339,,,,final
@@ -2290,8 +2316,9 @@ date,asset,close,open,high,low,status
 2026-11-08,SUI,0.81914,,,,final
 2026-11-09,SUI,0.84296,,,,final
 2026-11-10,SUI,0.82295,,,,final
-2026-11-11,SUI,0.8278,,,,zwischenstand
+2026-11-11,SUI,0.82273,,,,final
 2026-11-12,SUI,0.8134,,,,zwischenstand
+2026-11-13,SUI,0.7756,,,,zwischenstand
 2026-09-08,SHIB,0.00000541,,,,final
 2026-09-09,SHIB,0.00000526,,,,final
 2026-09-10,SHIB,0.00000504,,,,final
@@ -2388,7 +2415,8 @@ date,asset,close,open,high,low,status
 2026-11-09,DXY,101.65,,,,final
 2026-11-10,DXY,102.23,,,,final
 2026-11-11,DXY,102.91,,,,final
-2026-11-12,DXY,102.98,,,,zwischenstand
+2026-11-12,DXY,103.17,,,,final
+2026-11-13,DXY,103.17,,,,zwischenstand
 2026-09-28,US10Y,5.242,5.196,5.274,5.192,final
 2026-09-29,US10Y,5.255,5.230,5.293,5.205,final
 2026-09-30,US10Y,5.293,5.238,5.306,5.201,final
@@ -2421,6 +2449,7 @@ date,asset,close,open,high,low,status
 2026-11-09,US10Y,4.864,,,,final
 2026-11-10,US10Y,4.983,,,,final
 2026-11-11,US10Y,4.998,,,,final
+2026-11-12,US10Y,5.103,,,,final
 2026-09-28,VIX,16.07,16.16,16.62,15.68,final
 2026-09-29,VIX,16.04,16.17,16.44,15.73,final
 2026-09-30,VIX,16.34,15.93,16.61,15.62,final
@@ -2454,6 +2483,7 @@ date,asset,close,open,high,low,status
 2026-11-09,VIX,19.92,,,,final
 2026-11-10,VIX,19.46,,,,final
 2026-11-11,VIX,17.49,,,,final
+2026-11-12,VIX,18.7,,,,final
 2026-09-02,IS3N,47.53,47.23,47.54,46.89,final
 2026-09-03,IS3N,47.53,47.25,47.53,47.11,final
 2026-09-04,IS3N,48.21,47.77,48.28,47.70,final
