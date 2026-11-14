@@ -2,7 +2,9 @@
 """Ergänzt kurse_usd.csv, kurse_beob_usd.csv, kurse_welt.csv um neuere Tageskurse aus dem Marktdaten-Repo (nur Kurse, keine Prognose).
 Aufruf: python3 grok_sync.py <repo_dir> <eingabe_dir> <ausgabe_dir>
 Regeln: alte Zeilen bleiben unverändert (nur Zwischenstand-Zeilen werden ersetzt), je Wert nur wenn die letzten bis zu 6 gemeinsamen Tage
-im Median höchstens 2,5 % abweichen, sonst wird der Wert übersprungen. Heutiger Tag (Wiener Datum) = zwischenstand, frühere = final."""
+im Median höchstens 2,5 % abweichen, sonst wird der Wert übersprungen. Heutiger Tag (Wiener Datum) = zwischenstand, frühere = final.
+Tage vor dem ersten gespeicherten Tag werden aus dem Repo nachgetragen (Historie verlängern); Werte ohne Zeilen starten mit der Repo-Historie.
+Werte, die das Repo (noch) nicht führt, werden still übersprungen und kommen automatisch, sobald es sie führt."""
 import sys,re,json,base64,gzip,datetime,statistics,os
 from zoneinfo import ZoneInfo
 repo,indir,outdir=sys.argv[1:4]
@@ -19,8 +21,8 @@ for a in d['assets']:
         off+=x; ds.append((D0+datetime.timedelta(days=off)).isoformat())
     G[a['ticker']]=dict(zip(ds,a['c']))
 FILES={'kurse_usd.csv':{'BTC':'BTC-USD','ETH':'ETH-USD','SOL':'SOL-USD','XRP':'XRP-USD','DOGE':'DOGE-USD','GOLD':'GC=F','SILBER':'SI=F','PLATIN':'PL=F','SPX':'^GSPC'},
-'kurse_beob_usd.csv':{'ADA':'ADA-USD','LINK':'LINK-USD','AVAX':'AVAX-USD','BNB':'BNB-USD','NDX':'^NDX','NVDA':'NVDA','COIN':'COIN','AAPL':'AAPL','MSFT':'MSFT','AMZN':'AMZN','GOOGL':'GOOGL','PALLADIUM':'PA=F','DAX':'^GDAXI'},
-'kurse_welt.csv':{'ATX':'^ATX','WIE':'WIE.VI','VER':'VER.VI','EBS':'EBS.VI','OMV':'OMV.VI','ANDR':'ANDR.VI','N225':'^N225','HSI':'^HSI','SSEC':'000001.SS','NIFTY':'^NSEI','SX5E':'^STOXX50E','RUT':'^RUT','WTI':'CL=F','BRENT':'BZ=F','KUPFER':'HG=F','ERDGAS':'NG=F','DXY':'DX-Y.NYB','US10Y':'^TNX','VIX':'^VIX','TSM':'TSM','BABA':'BABA','TENCENT':'0700.HK','ASML':'ASML','SAP':'SAP.DE','TSLA':'TSLA','META':'META','LLY':'LLY','DOT':'DOT-USD','LTC':'LTC-USD','SUI':'SUI20947-USD','NESN':'NESN.SW','ALV':'ALV.DE','VOE':'VOE.VI','TON':'TON11419-USD'}}
+'kurse_beob_usd.csv':{'ADA':'ADA-USD','LINK':'LINK-USD','AVAX':'AVAX-USD','BNB':'BNB-USD','NDX':'^NDX','NVDA':'NVDA','COIN':'COIN','AAPL':'AAPL','MSFT':'MSFT','AMZN':'AMZN','GOOGL':'GOOGL','PALLADIUM':'PA=F','DAX':'^GDAXI','EUNL':'EUNL.DE','SXR8':'SXR8.DE'},
+'kurse_welt.csv':{'ATX':'^ATX','WIE':'WIE.VI','VER':'VER.VI','EBS':'EBS.VI','OMV':'OMV.VI','ANDR':'ANDR.VI','N225':'^N225','HSI':'^HSI','SSEC':'000001.SS','NIFTY':'^NSEI','SX5E':'^STOXX50E','RUT':'^RUT','WTI':'CL=F','BRENT':'BZ=F','KUPFER':'HG=F','ERDGAS':'NG=F','DXY':'DX-Y.NYB','US10Y':'^TNX','VIX':'^VIX','TSM':'TSM','BABA':'BABA','TENCENT':'0700.HK','ASML':'ASML.AS','SAP':'SAP.DE','TSLA':'TSLA','META':'META','LLY':'LLY','DOT':'DOT-USD','LTC':'LTC-USD','SUI':'SUI20947-USD','NESN':'NESN.SW','ALV':'ALV.DE','VOE':'VOE.VI','TON':'TON11419-USD','V':'V','RBI':'RBI.VI','TOYOTA':'7203.T','SONY':'6758.T','SAMSUNG':'005930.KS','KOSPI':'^KS11','FTSE':'^FTSE','CAC':'^FCHI','SMI':'^SSMI','DJI':'^DJI','LVMH':'MC.PA','SIE':'SIE.DE','SHEL':'SHEL.L','BRKB':'BRK-B','JPM':'JPM','NFLX':'NFLX','WEIZEN':'ZW=F','TRX':'TRX-USD','SHIB':'SHIB-USD','IS3N':'IS3N.DE','EUNA':'EUNA.DE'}}
 fmt=lambda v:('%.6f'%v).rstrip('0').rstrip('.')
 for fn,mp in FILES.items():
     lines=open(os.path.join(indir,fn),'rb').read().decode().split('\n')
@@ -32,16 +34,20 @@ for fn,mp in FILES.items():
         c=ln.rstrip('\r').split(',')
         if c[1] not in rows: order.append(c[1]); rows[c[1]]=[]
         rows[c[1]].append([c[0],ln])
+    crlf0=body[0].endswith('\r') if body else False
     for a,tk in mp.items():
-        if tk not in G or a not in rows: print(fn,a,'übersprungen: Quelle fehlt'); continue
-        g=G[tk]; cur=rows[a]; st={r[0]:r for r in cur}
+        if tk not in G: print(fn,a,'übersprungen: Repo führt',tk,'nicht'); continue
+        g=G[tk]
+        if a not in rows: order.append(a); rows[a]=[]; print(fn,a,'neu: startet mit Repo-Historie')
+        cur=rows[a]; st={r[0]:r for r in cur}
         common=[x for x in sorted(st) if x in g][-6:]
-        if len(common)<2: print(fn,a,'übersprungen: kein Überlapp'); continue
-        med=statistics.median(abs(g[x]/float(st[x][1].rstrip('\r').split(',')[2])-1) for x in common)
+        if st and len(common)<2: print(fn,a,'übersprungen: kein Überlapp'); continue
+        med=statistics.median(abs(g[x]/float(st[x][1].rstrip('\r').split(',')[2])-1) for x in common) if st else 0.0
         if med>0.025: print(fn,a,'übersprungen: Abweichung %.1f %%'%(med*100)); continue
-        last=max(st); crlf=st[last][1].endswith('\r'); add=rep=0
+        first=min(st) if st else '9999'; last=max(st) if st else '0000'
+        crlf=st[last][1].endswith('\r') if st else crlf0; add=rep=0
         for x in sorted(g):
-            if x<last and x not in st: continue
+            if first<x<last and x not in st: continue
             s='zwischenstand' if x>=TODAY else 'final'
             if x in st:
                 c=st[x][1].rstrip('\r').split(',')
@@ -50,7 +56,7 @@ for fn,mp in FILES.items():
                 continue
             r=[x,f"{x},{a},{fmt(g[x])},,,,{s}"+('\r' if crlf else '')]; cur.append(r); st[x]=r; add+=1
         cur.sort(key=lambda r:r[0])
-        print(fn,a,'ok +%d ersetzt %d bis %s (Abw. %.2f %%)'%(add,rep,max(st),med*100))
+        print(fn,a,'ok +%d ersetzt %d, %s bis %s (Abw. %.2f %%)'%(add,rep,min(st),max(st),med*100))
     out=[hdr]+[r[1] for a in order for r in rows[a]]
     open(os.path.join(outdir,fn),'wb').write(('\n'.join(out)+('\n' if trail else '')).encode())
 
