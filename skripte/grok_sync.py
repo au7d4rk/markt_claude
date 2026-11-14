@@ -56,14 +56,40 @@ for fn,mp in FILES.items():
 
 # KI-Zyklus: komplette Kursreihen ausgewählter Werte aus dem Repo (kurse_ki.csv mit date,asset,close), wird jedes Mal neu geschrieben
 KI={'SMH':'Halbleiter-ETF','NVDA':'Nvidia','MU':'Micron','AVGO':'Broadcom','AMD':'AMD','TSM':'TSMC','MSFT':'Microsoft','GOOGL':'Alphabet','META':'Meta','AMZN':'Amazon','CCJ':'Cameco','URNM':'Uran-Minen-ETF','HG=F':'Kupfer','^GSPC':'S&P 500','^NDX':'Nasdaq 100','CBRS':'Cerebras','SPCX':'SpaceX'}
+# Bestehende Zeilen (eingabe_dir/kurse_ki.csv) bleiben erhalten, das Repo liefert nur noch rund 280 Tage; neuere oder geänderte Tage kommen aus dem Repo
 try:
-    kr=['date,asset,close']
+    KK={}
+    alt=os.path.join(indir,'kurse_ki.csv')
+    if os.path.exists(alt):
+        for ln in open(alt,encoding='utf-8').read().replace('\r\n','\n').split('\n')[1:]:
+            c=ln.split(',')
+            if len(c)>=3 and c[2]: KK[(c[1],c[0])]=c[2]
+    n0=len(KK)
     for tk in KI:
-        if tk in G:
-            for x in sorted(G[tk]): kr.append(f"{x},{tk},{fmt(G[tk][x])}")
-    open(os.path.join(outdir,'kurse_ki.csv'),'w').write('\n'.join(kr)+'\n'); print('kurse_ki.csv',len(kr)-1,'Zeilen,',sum(1 for t in KI if t in G),'Werte')
+        for x,v in G.get(tk,{}).items(): KK[(tk,x)]=fmt(v)
+    kr=['date,asset,close']
+    for tk in [t for t in KI if any(k[0]==t for k in KK)]:
+        for x in sorted(k[1] for k in KK if k[0]==tk): kr.append(f"{x},{tk},{KK[(tk,x)]}")
+    open(os.path.join(outdir,'kurse_ki.csv'),'w').write('\n'.join(kr)+'\n'); print('kurse_ki.csv',len(kr)-1,'Zeilen (vorher',n0,'),',len({k[0] for k in KK}),'Werte')
 except Exception as e:
     print('kurse_ki.csv übersprungen:',e)
+
+# EUR/USD (fx.csv mit date,eurusd): nur neuere Tage anhängen, wenn die letzten bis zu 6 gemeinsamen Tage im Median höchstens 0,5 % abweichen
+try:
+    fxp=os.path.join(indir,'fx.csv'); g=G.get('EURUSD=X',{})
+    if os.path.exists(fxp) and g:
+        raw=open(fxp,'rb').read().decode(); crlf='\r\n' in raw; nl='\r\n' if crlf else '\n'
+        L=raw.replace('\r\n','\n').rstrip('\n').split('\n'); st={l.split(',')[0]:float(l.split(',')[1]) for l in L[1:] if l}
+        common=[x for x in sorted(st) if x in g][-6:]
+        med=statistics.median(abs(g[x]/st[x]-1) for x in common) if len(common)>=2 else None
+        if med is None or med>0.005: print('fx.csv übersprungen: Abweichung oder kein Überlapp',med)
+        else:
+            last=max(st); add=[x for x in sorted(g) if x>last and x<TODAY]
+            L+= [f"{x},{g[x]:.4f}" for x in add]
+            open(os.path.join(outdir,'fx.csv'),'wb').write((nl.join(L)+nl).encode()); print('fx.csv ok +%d bis %s (Abw. %.2f %%)'%(len(add),add[-1] if add else last,med*100))
+    else: print('fx.csv übersprungen: Eingabe oder Quelle fehlt')
+except Exception as e:
+    print('fx.csv übersprungen:',e)
 
 # Stimmung und Flüsse (nur Kennzahlen aus dem Repo, keine Prognose): stimmung.csv mit date,faktor,wert
 try:
