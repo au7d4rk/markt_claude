@@ -2,6 +2,7 @@
 // Eigenständig: liest nur Datensätze über dash und die eigenen Browser-Einträge (Depot, Stand).
 (() => {
   const root = document.getElementById('dash-root') || document;
+  try { d3.timeFormatDefaultLocale({ dateTime: '%A, %e. %B %Y, %X', date: '%d.%m.%Y', time: '%H:%M:%S', periods: ['AM', 'PM'], days: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'], shortDays: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'], months: ['Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'], shortMonths: ['Jän', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'] }); } catch (e) { /* d3 fehlt */ }
   const $ = (s) => root.querySelector(s);
   const fmtN = (v, d) => (v == null || !Number.isFinite(v) ? '–' : v.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }));
   const pct = (v, d = 1) => (v == null || !Number.isFinite(v) ? '–' : (v > 0 ? '+' : v < 0 ? '−' : '') + fmtN(Math.abs(v) * 100, d) + ' %');
@@ -483,9 +484,48 @@
 .mx-uhr { margin: var(--cds-gap-sm) 0 0; padding-left: 1.4rem; display: grid; gap: 0.35rem; }
 .mx-uhr li { color: var(--color-fg-muted); } .mx-uhr li b { color: var(--color-fg); font-weight: 500; margin-right: 0.5rem; }
 .mx-uhr li.on { color: var(--color-fg); } .mx-uhr li.on::marker { color: var(--color-bad); font-weight: 700; }
-#mx-gesamt .up, #mx-konj .up, #mx-zyk .up { color: var(--color-ok); } #mx-gesamt .down, #mx-konj .down, #mx-zyk .down { color: var(--color-bad); }`;
+#mx-gesamt .up, #mx-konj .up, #mx-zyk .up { color: var(--color-ok); } #mx-gesamt .down, #mx-konj .down, #mx-zyk .down { color: var(--color-bad); }
+.mk-tab[aria-selected="true"]:hover { background: var(--color-fg); color: var(--color-bg); }
+@media (max-width: 720px) { .mk-tab[aria-selected="true"]:hover { background: transparent; color: var(--color-fg); } }
+.mk-card.mk-fold > summary, .mk-card > details.mk-fold:only-child > summary { display: flex; border: 0; border-radius: 0; background: none; padding: 0; min-height: 0; box-shadow: none; font-weight: var(--cds-font-weight-medium); cursor: pointer; }
+.mk-card .mk-fold:not(.mk-card) > summary { font-size: var(--cds-font-size-body); }
+[data-mxc] > :first-child { cursor: pointer; position: relative; padding-right: 2rem; margin: 0; border-radius: var(--cds-radius); }
+[data-mxc] > :first-child::after { content: ''; position: absolute; right: 0.4rem; top: 0.45rem; width: 0.5rem; height: 0.5rem; border-right: 2px solid var(--color-fg-muted); border-bottom: 2px solid var(--color-fg-muted); transform: rotate(45deg); transition: transform 0.15s; }
+[data-mxc][data-open] > :first-child::after { transform: rotate(-135deg); top: 0.65rem; }
+[data-mxc]:not([data-open]) > :not(:first-child) { display: none !important; }
+[data-mxc] > :first-child:focus-visible, .mx-tog:focus-visible { outline: 2px solid var(--cds-border); outline-offset: 4px; }
+[data-mxc][data-open] > :first-child .mx-sum { display: none; }
+.mx-lage h3 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+[data-mxc]:not([data-open]) .mx-lage b { font-size: var(--cds-font-size-heading); }
+.mx-strip { display: grid; gap: var(--cds-gap-sm); grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); }
+.mx-st { font: inherit; color: inherit; text-align: left; min-width: 0; display: flex; flex-direction: column; gap: 2px; background: var(--color-panel); border: 1px solid var(--color-border-line); border-left: 4px solid var(--mx-c, var(--color-border-line)); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); cursor: pointer; }
+.mx-st:hover { border-color: var(--color-fg); border-left-color: var(--mx-c, var(--color-fg)); }
+.mx-st small { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.35; }
+.mx-st b { font-weight: 500; font-size: 1.15rem; line-height: 1.25; }
+.mx-jump { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); align-items: center; }
+.mx-jump > span { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-right: var(--cds-gap-xs); }
+.mk-view .mk-card, .mk-view .mk-sec, #amp-list { scroll-margin-top: 4.5rem; }
+.amp-row:not(.amp-hd) { padding-block: 0.3rem; margin-top: 3px; }
+.amp-row svg { width: 15px; height: 34px; }
+.amp-name small { line-height: 1.2; }
+.mx-tog { cursor: pointer; } .mx-tog h3::after { content: ' ▾'; color: var(--color-fg-muted); } .mx-tog[aria-expanded="true"] h3::after { content: ' ▴'; }
+.ch-grid[hidden] { display: none; }
+#mx-gesamt th:last-child { text-align: left; }
+.mx-card svg text { font-size: 11px; }
+@media (max-width: 40rem) {
+  .mk-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mk-tile { padding: var(--cds-pad-sm); } .mk-tile-last { font-size: 1.3rem; }
+  .mx-card .mk-table thead { display: none; }
+  .mx-card .mk-table tr { display: flex; flex-wrap: wrap; gap: 1px 0.9rem; padding: 0.45rem 0; border-bottom: 1px solid var(--color-border-line); }
+  .mx-card .mk-table tbody tr:last-child { border-bottom: 0; }
+  .mx-card .mk-table td { display: block; border: 0; padding: 0; white-space: normal; text-align: left; min-width: 0; }
+  .mx-card .mk-table td:first-child { flex: 1 1 100%; font-weight: 500; }
+  .mx-card .mk-table td:not(:first-child)[data-l]::before { content: attr(data-l) ' '; color: var(--color-fg-muted); font-weight: 400; }
+  .mx-card .mk-table td:empty { display: none; }
+  .mx-card { padding: var(--cds-pad-md); }
+}`;
   root.appendChild(css);
 
+  const STAT = {};
   const card = (id, after, cls) => {
     let el = $('#' + id);
     if (!el) { const anchor = $(after); if (!anchor) return null; el = document.createElement('div'); el.id = id; el.className = 'mk-card ' + (cls || ''); anchor.insertAdjacentElement('afterend', el); }
@@ -494,7 +534,7 @@
   const wait = (el, ids) => { const bad = ids.find((id) => ['error', 'missing', 'declined', 'connect'].includes(dash.data(id).status)); el.innerHTML = '<p class="mk-sub">' + (bad ? 'Die Daten dafür konnten nicht geladen werden.' : 'Lädt …') + '</p>'; };
 
   const renderLage = () => {
-    const el = card('mx-lage', '#today-sub', 'mx-card');
+    const el = card('mx-lage', '#mx-umfeld-h', 'mx-card');
     if (!el) return;
     el.setAttribute('data-source', 'marktlage stimmung_lage');
     if (!ok(['marktlage'])) { wait(el, ['marktlage', 'kurse_welt', 'kurse_usd', 'kurse_beob']); return; }
@@ -503,6 +543,7 @@
     const rows = base.filter((r) => r.faktor !== 'Gesamt').concat(extra);
     const sum = rows.reduce((t, r) => t + r.punkte, 0), stand = rows.map((r) => r.stand).sort().pop();
     const text = sum >= 2 ? 'freundlich' : sum <= -2 ? 'angespannt' : 'gemischt';
+    STAT.lage = { t: text, s: (sum > 0 ? '+' : '') + sum + ' Punkte', c: sum >= 2 ? 'ok' : sum <= -2 ? 'bad' : 'warn' };
     el.className = 'mk-card mx-card ' + (sum >= 2 ? 'ok' : sum <= -2 ? 'bad' : 'warn');
     const val = (r) => (r.einheit === '%' ? pct(r.wert, 1) : r.einheit !== undefined ? fmtN(r.wert, r.einheit === 'Pp.' ? 2 : r.faktor.startsWith('Fear') ? 0 : 3) + (r.einheit ? ' ' + r.einheit : '') + (r.faktor.startsWith('Fear') ? '' : ' (' + (r.z > 0 ? '+' : r.z < 0 ? '−' : '') + fmtN(Math.abs(r.z), 1) + ' σ)')
       : r.faktor.startsWith('Angst') ? fmtN(r.wert, 1) : r.faktor.startsWith('US-Zins') ? (r.wert > 0 ? '+' : r.wert < 0 ? '−' : '') + fmtN(Math.abs(r.wert), 2) + ' Pp.' : r.faktor.startsWith('Breite') ? fmtN(r.wert * 100, 0) + ' %' : pct(r.wert, 1));
@@ -528,7 +569,7 @@
   };
 
   const renderGesamt = () => {
-    const el = card('mx-gesamt', '#amp-lead', 'mx-card');
+    const el = card('mx-gesamt', '#amp-list', 'mx-card');
     if (!el) return;
     el.setAttribute('data-source', 'gesamtbild');
     if (!ok(['gesamtbild'])) { wait(el, ['gesamtbild', 'ampel_alle', 'marktlage', 'stimmung_lage']); return; }
@@ -565,6 +606,7 @@
         + R.map((r) => `<tr><td>${fd(r.beginn)} – ${fd(r.ende)}</td><td class="${sg(r.vorher_12m)}">${pct(r.vorher_12m, 0)}</td><td class="${sg(r.nach_12m)}">${pct(r.nach_12m, 0)}</td><td class="${sg(r.nach_24m)}">${pct(r.nach_24m, 0)}</td><td class="down">${pct(r.rueckgang, 0)}</td><td>${fd(r.tief)}</td><td>${r.monate_bis_hoch == null ? 'noch nicht' : r.monate_bis_hoch + ' Mon.'}</td></tr>`).join('')
         + '</tbody></table></div><p class="mk-sub">Rezessions-Daten: NBER. Kurse: Monatsdurchschnitte des S&P 500 nach Robert Shiller, ohne Dividenden und ohne Inflationsbereinigung.</p></details>';
     }
+    STAT.konj = { t: g.text.replace(/ \(.*/, ''), s: (g.text.match(/\((.*)\)/) || [])[1] || '', c: g.stufe === 2 ? 'bad' : g.stufe === 1 ? 'warn' : 'ok' };
     el.innerHTML = `<div class="mx-lage"><h3>Konjunktur-Vorzeichen (USA)</h3><b>${esc(g.text)}</b><span class="mk-sub">Stand ${fd(g.stand)}</span></div>`
       + '<p class="mk-sub">Signale, die Abschwüngen in der Vergangenheit oft vorausgingen. Einzelne Warnungen gibt es auch ohne Rezession, aussagekräftig wird es erst, wenn mehrere zusammenkommen. Die Werte werden einmal pro Woche erneuert.</p>'
       + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Vorzeichen</th><th>Wert</th><th>Einordnung</th><th>Status</th><th>Stand</th></tr></thead><tbody>'
@@ -600,6 +642,7 @@
     const rows = dash.data('spaetzyklus').data, P = rows.filter((r) => r.art === 'punkt'), S = rows.filter((r) => r.art === 'stufe');
     const n = S.filter((r) => r.erreicht).length;
     const ST = { 2: '<span class="down">Warnung</span>', 1: 'Achtung', 0: '<span class="up">unauffällig</span>' };
+    STAT.zyk = { t: n + ' von ' + S.length + ' Stufen', s: 'Ablauf vor früheren Abschwüngen', c: n >= 4 ? 'bad' : n >= 2 ? 'warn' : 'ok' };
     el.innerHTML = `<div class="mx-lage"><h3>Zyklus-Uhr</h3><b>${n} von ${S.length} Stufen erreicht</b></div>`
       + '<p class="mk-sub">Vor früheren Abschwüngen lief es oft in dieser Reihenfolge ab. Die Stufen müssen nicht alle und nicht genau so kommen, und zwischen den ersten Stufen und einem Abschwung lagen oft ein bis zwei Jahre. Die Uhr zeigt, wie weit der typische Ablauf heute fortgeschritten ist, nicht wann etwas passiert.</p>'
       + '<ol class="mx-uhr">' + S.map((r) => `<li class="${r.erreicht ? 'on' : ''}"><b>${esc(r.name)}</b><span>${r.erreicht == null ? 'keine Daten' : r.erreicht ? 'erreicht' : 'noch nicht'}${r.wert ? ' · ' + esc(r.wert) : ''}</span></li>`).join('') + '</ol>'
@@ -619,15 +662,15 @@
     el.innerHTML = '<h3>Aktien in Gold gemessen (S&P 500 ÷ Goldpreis)</h3>'
       + `<p class="mk-sub">Wie viele Unzen Gold kostet der S&P 500? Steigt die Linie, waren Aktien besser als Gold, fällt sie, war Gold besser. Heute: ${now ? fmtN(now.ratio, 2) : '–'} (${now ? fd(now.date) : ''})${lastHi && now ? `, ${pct(now.ratio / lastHi.ratio - 1, 0)} seit dem letzten Hoch ${fd(lastHi.date)}` : ''}. Die großen Hochpunkte lagen 1929, 1967 und 2000, danach folgten jeweils lange Phasen, in denen Gold besser lief. Wenige Wiederholungen, also ein Muster, keine Regel.</p>`
       + '<div class="mx-chart" id="mx-ag-chart"></div>'
-      + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Wendepunkt</th><th>Monat</th><th>S&P 500 in Unzen Gold</th></tr></thead><tbody>'
+      + '<details class="mk-fold"><summary>Wendepunkte als Tabelle</summary><div class="mk-scroll"><table class="mk-table"><thead><tr><th>Wendepunkt</th><th>Monat</th><th>S&P 500 in Unzen Gold</th></tr></thead><tbody>'
       + ext.map((r) => `<tr><td>${r.art === 'hoch' ? 'Hoch' : 'Tief'}</td><td>${fd(r.date)}</td><td>${fmtN(r.ratio, 2)}</td></tr>`).join('')
-      + '</tbody></table></div><p class="mk-sub">Logarithmische Skala. Daten: S&P 500 nach Robert Shiller und monatliche Goldpreise (GitHub datasets/s-and-p-500 und datasets/gold-prices), aktueller Wert aus unseren Tageskursen. Bis 1933 war der Goldpreis in den USA fest.</p>';
-    const host = el.querySelector('#mx-ag-chart'), W = 800, H = 280, m = { t: 12, r: 12, b: 24, l: 40 };
+      + '</tbody></table></div></details><p class="mk-sub">Logarithmische Skala. Daten: S&P 500 nach Robert Shiller und monatliche Goldpreise (GitHub datasets/s-and-p-500 und datasets/gold-prices), aktueller Wert aus unseren Tageskursen. Bis 1933 war der Goldpreis in den USA fest.</p>';
+    const host = el.querySelector('#mx-ag-chart'), W = Math.max(330, host.clientWidth || 800), H = 280, m = { t: 12, r: 12, b: 24, l: 40 };
     const pts = rows.map((r) => ({ d: new Date(r.date.length === 7 ? r.date + '-15T00:00:00Z' : r.date + 'T00:00:00Z'), v: r.ratio, art: r.art, date: r.date }));
     const x = d3.scaleUtc().domain(d3.extent(pts, (p) => p.d)).range([m.l, W - m.r]);
     const y = d3.scaleLog().domain([d3.min(pts, (p) => p.v) * 0.9, d3.max(pts, (p) => p.v) * 1.1]).range([H - m.b, m.t]);
     const svg = d3.select(host).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%').attr('role', 'img').attr('aria-label', 'S&P 500 in Unzen Gold seit 1871');
-    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(8).tickSizeOuter(0)).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--color-border-line)'));
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(W < 500 ? 4 : 8).tickSizeOuter(0)).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--color-border-line)'));
     svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([0.2, 0.5, 1, 2, 5]).tickFormat((v) => fmtN(v, v < 1 ? 1 : 0))).call((g) => g.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((g) => g.selectAll('line,path').attr('stroke', 'var(--color-border-line)'));
     svg.append('path').datum(pts).attr('fill', 'none').attr('stroke', (dash.colors && dash.colors[0]) || 'currentColor').attr('stroke-width', 1.6).attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v)));
     const mk = pts.filter((p) => p.art);
@@ -637,7 +680,7 @@
 
   const fdm = (d) => (!d ? '–' : d.length === 7 ? d.slice(5) + '/' + d.slice(0, 4) : new Date(d + 'T00:00:00').toLocaleDateString('de-DE'));
   const lineChart = (host, series, o) => {
-    const W = 800, H = o.h || 260, m = { t: 12, r: 12, b: 24, l: 48 };
+    const W = Math.max(330, host.clientWidth || 800), H = o.h || 260, m = { t: 12, r: 12, b: 24, l: 48 };
     const all = series.flatMap((x) => x.pts);
     if (!all.length) return;
     const x = d3.scaleUtc().domain(d3.extent(all, (p) => p.d)).range([m.l, W - m.r]);
@@ -645,7 +688,7 @@
     const y = (o.log ? d3.scaleLog().domain([ext[0] / pad, ext[1] * pad]) : d3.scaleLinear().domain(o.domain || [ext[0] - pad, ext[1] + pad])).range([H - m.b, m.t]);
     const svg = d3.select(host).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', '100%').attr('role', 'img').attr('aria-label', o.label || '');
     const ax = (g) => g.call((q) => q.selectAll('text').attr('fill', 'var(--color-fg-muted)')).call((q) => q.selectAll('line,path').attr('stroke', 'var(--color-border-line)'));
-    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(7).tickSizeOuter(0)).call(ax);
+    svg.append('g').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(W < 500 ? 4 : 7).tickSizeOuter(0)).call(ax);
     svg.append('g').attr('transform', `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(5, o.log ? '~s' : undefined).tickFormat(o.yfmt || null)).call(ax);
     if (o.zero != null) svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(o.zero)).attr('y2', y(o.zero)).attr('stroke', 'var(--color-fg-muted)').attr('stroke-dasharray', '3 3');
     series.forEach((sr, i) => svg.append('path').datum(sr.pts).attr('fill', 'none').attr('stroke', sr.color || (dash.colors && dash.colors[i]) || 'currentColor').attr('stroke-width', sr.w || 1.8).attr('stroke-dasharray', sr.dash || null).attr('d', d3.line().x((p) => x(p.d)).y((p) => y(p.v))));
@@ -683,7 +726,7 @@
     const ath = R.find((r) => r.start === 'Am Rekordhoch 2021');
     el.innerHTML = '<h3>Was wäre, wenn: dein Bitcoin-Sparplan durch einen Absturz</h3>'
       + `<p class="mk-sub">25 € alle 2 Wochen in Bitcoin, mit Bitpanda-Aufschlag, ohne Steuern. Der härteste Fall: Start genau am Rekordhoch ${fdm(ath ? ath.startdatum : '')}, danach fiel Bitcoin um rund drei Viertel.</p>`
-      + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Start</th><th>Eingezahlt</th><th>Wert heute</th><th>Ergebnis</th><th>Schlimmster Zwischenstand</th><th>Wieder dauerhaft im Plus nach</th><th>Am Tief 2022 aufgehört</th></tr></thead><tbody>'
+      + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Start</th><th>Eingezahlt</th><th>Wert heute</th><th>Ergebnis</th><th>Tiefster Stand</th><th>Dauerhaft im Plus nach</th><th>Hätte man am Tief 2022 aufgehört</th></tr></thead><tbody>'
       + R.map((r) => `<tr><td>${esc(r.start)} (${fdm(r.startdatum)})</td><td>${eur(r.eingezahlt)}</td><td>${eur(r.wert)}</td><td class="${sg(r.ergebnis)}">${pct(r.ergebnis, 0)}</td><td class="${sg(r.tiefster)}">${pct(r.tiefster, 0)}</td><td>${r.tiefster >= 0 ? 'nie im Minus' : r.monate_bis_plus == null ? 'noch nicht' : r.monate_bis_plus + ' Monaten'}</td><td>${r.gestoppt_wert == null ? '–' : eur(r.gestoppt_wert) + ' aus ' + eur(r.gestoppt_eingezahlt)}</td></tr>`).join('')
       + '</tbody></table></div><div class="mx-chart" id="mx-baer-chart"></div>'
       + '<p class="mk-sub">Die Linien zeigen den Start am Rekordhoch: eingezahlt (gestrichelt) gegen Wert. Wer im Absturz weiterkaufte, kaufte billig nach und war deutlich früher wieder im Plus als der Kurs selbst. Rückblick, keine Garantie: Ob der nächste Absturz genauso ausgeht, weiß niemand.</p>';
@@ -717,6 +760,7 @@
     const val = (x) => (x.einheit === '%' ? pct(x.wert, 0) : x.einheit === 'anteil' ? fmtN(x.wert * 100, 0) + ' %' : x.einheit === 'Pp.' ? (x.wert > 0 ? '+' : '') + fmtN(x.wert, 2) + ' Pp.' : String(x.wert));
     const ORD = ['Index', 'Chips', 'Cloud', 'Energie', 'Neu'], GN = { Index: 'Index', Chips: 'Chips', Cloud: 'Cloud', Energie: 'Energie/Rohstoff', Neu: 'Neu an der Börse' };
     el.className = 'mk-card mx-card ' + (ph.hitze >= 4 && ph.geld === 2 ? 'bad' : ph.hitze >= 4 ? 'warn' : 'ok');
+    STAT.ki = { t: ph.phase, s: 'Rausch-Punkte ' + ph.hitze + ' von 7', c: ph.hitze >= 4 && ph.geld === 2 ? 'bad' : ph.hitze >= 4 ? 'warn' : 'ok' };
     el.innerHTML = `<div class="mx-lage"><h3>KI-Zyklus-Monitor</h3><b>${esc(ph.phase)}</b><span class="mk-sub">Rausch-Punkte ${ph.hitze} von 7, Stand ${fdm(ph.stand)}</span></div>`
       + '<p class="mk-sub">Frühere Technikwellen (Eisenbahn, Elektrizität, Internet) liefen in vier Phasen: Aufbruch, Rausch, Wendepunkt, Ausbreitung. Der Wendepunkt kam 1929 und 2000 nach Zinserhöhungen. Die Karte misst, wie heiß die KI-Werte laufen und ob die Geldpolitik strafft. Ein Rausch kann lange dauern, den Zeitpunkt der Wende zeigt sie nicht.</p>'
       + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Signal</th><th>Heute</th><th>Was gemessen wird</th><th>Status</th></tr></thead><tbody>'
@@ -745,7 +789,7 @@
       + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Regel</th><th>Endwert nach Kosten und Steuer</th><th>Pro Jahr</th><th>Ohne Kosten und Steuer</th><th>Größter Rückgang</th><th>Käufe und Verkäufe</th><th>Zeit investiert</th></tr></thead><tbody>'
       + rows.map((r) => `<tr><td class="txt">${esc(r.label)}</td><td class="${r === h ? '' : sg(r.endwert - h.endwert)}">${eur(r.endwert)}</td><td>${pct(r.pro_jahr, 1)}</td><td>${eur(r.endwert_ohne)}</td><td class="down">${pct(r.groesster_rueckgang, 0)}</td><td>${r.wechsel}</td><td>${fmtN(r.investiert * 100, 0)} %</td></tr>`).join('')
       + '</tbody></table></div><p class="mk-sub">Grün oder rot heißt besser oder schlechter als Halten nach Kosten und Steuer. Jeder Wechsel kostet Aufschlag, Abschlag und oft Steuer. Eine Regel muss also deutlich mehr bringen, als sie ohne Kosten zeigt. Das ist ein Rückblick über wenige Jahre und keine Garantie.</p>';
-    el.querySelectorAll('[data-sa]').forEach((b) => b.addEventListener('click', () => { stoppAsset = b.dataset.sa; renderStopp(); }));
+    el.querySelectorAll('[data-sa]').forEach((b) => b.addEventListener('click', () => { stoppAsset = b.dataset.sa; renderStopp(); foldify(); }));
   };
 
   const SCEN = [
@@ -790,7 +834,7 @@
       + '<div class="mk-scroll"><table class="mk-table mx-row"><thead><tr><th>Szenario</th><th>Depot danach</th><th>Veränderung</th>' + names.map((a) => `<th>${esc(nm(a))}</th>`).join('') + '</tr></thead><tbody>'
       + res.map((r) => `<tr><td class="txt">${esc(r.sc.t)}</td><td>${eur(tot + r.L)}</td><td class="${sg(r.L)}">${eur(r.L)} (${pct(r.L / tot, 0)})</td>` + names.map((a) => `<td class="${sg(r.per[a])}">${eur(r.per[a])}</td>`).join('') + '</tr>').join('')
       + '</tbody></table></div>'
-      + '<p class="mk-sub">Mitbewegung im letzten Jahr: ' + names.filter((a) => !B[a] || B[a].leitwert !== a).map((a) => (B[a] ? `${esc(nm(a))} ${fmtN(B[a].beta, 2)} zu ${esc(nm(B[a].leitwert))}` : `${esc(nm(a))} ohne eigene Kurse, angenommen 1`)).join(' · ') + '.</p>';
+      + (names.some((a) => !B[a] || B[a].leitwert !== a) ? '<p class="mk-sub">Mitbewegung im letzten Jahr: ' : '<p class="mk-sub" hidden>') + names.filter((a) => !B[a] || B[a].leitwert !== a).map((a) => (B[a] ? `${esc(nm(a))} ${fmtN(B[a].beta, 2)} zu ${esc(nm(B[a].leitwert))}` : `${esc(nm(a))} ohne eigene Kurse, angenommen 1`)).join(' · ') + '.</p>';
   };
 
   const renderRhythmus = () => {
@@ -808,10 +852,100 @@
       + '<p class="mk-sub">Die Unterschiede zwischen den Rhythmen sind klein und wechseln von Jahr zu Jahr das Vorzeichen. Wichtiger als der Rhythmus ist, dass du dabeibleibst.</p>';
   };
 
-  const all = () => { for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderReal, renderRsi, renderStopp]) { try { f(); } catch (e) { console.error(e); } } };
+
+  // ---------- Bedienung: einklappbare Karten, Überblick, Sprungmarken ----------
+  const OPEN = Object.assign({ 'mx-stress': true }, read('mk-open-v1', {}));
+  const FOLD = ['mx-lage', 'mx-konj', 'mx-zyk', 'mx-gesamt', 'mx-rsi', 'mx-stopp', 'mx-lang', 'mx-ag', 'mx-bg', 'mx-ki', 'mx-stress', 'mx-rhythmus', 'mx-baer', 'mx-real', 'pt-card', 'sim-card', 'muster-card'];
+  const D = (id) => (ok([id]) ? dash.data(id).data : []);
+  const SUM = {
+    'mx-gesamt': () => { const R = D('gesamtbild'), n = (k) => R.filter((r) => r.konsens === k).length; return R.length ? `${n('einig aufwärts')} einig aufwärts, ${n('einig abwärts')} einig abwärts, ${n('offen') + n('uneinig')} offen` : ''; },
+    'mx-rsi': () => 'Test seit 2020: danach ging es im Schnitt eher weiter',
+    'mx-stopp': () => { const R = D('stopp_test').filter((r) => r.asset === stoppAsset), h = R.find((r) => r.regel === 'halten'); if (!h) return ''; const k = R.filter((r) => r !== h && r.endwert > h.endwert).length; return `${nm(stoppAsset)}: ${k} von ${R.length - 1} Regeln besser als Halten`; },
+    'mx-lang': () => { const now = D('rueckgaenge_lang').find((r) => r.hoch === 'heute'), ch = D('cape_rueckblick').find((c) => c.heute); return (now ? 'heute ' + pct(now.tiefe, 1) + ' unter dem Hoch' : '') + (ch ? ' · Shiller-KGV ' + fmtN(ch.cape_heute, 1) : ''); },
+    'mx-ag': () => { const R = D('aktien_gold'), now = R.find((r) => r.art === 'heute'), hi = R.filter((r) => r.art === 'hoch').pop(); return now ? fmtN(now.ratio, 2) + ' Unzen' + (hi ? ', ' + pct(now.ratio / hi.ratio - 1, 0) + ' seit dem Hoch ' + fdm(hi.date) : '') : ''; },
+    'mx-bg': () => { const R = D('btc_gold'), now = R.find((r) => r.art === 'heute'); if (!now) return ''; const mx = R.reduce((m, r) => (r.ratio > m.ratio ? r : m), R[0]); return fmtN(now.ratio, 1) + ' Unzen, ' + pct(now.ratio / mx.ratio - 1, 0) + ' unter dem Hoch'; },
+    'mx-baer': () => { const a = D('sparplan_baer').find((r) => r.start === 'Am Rekordhoch 2021'); return a ? 'Start am Rekordhoch 2021: heute ' + pct(a.ergebnis, 0) : ''; },
+    'mx-real': () => { const k = D('euro_real').find((r) => r.letzter && r.anlage === 'Konto ohne Zinsen'); return k ? 'Konto ohne Zinsen: noch ' + eur(k.real) + ' Kaufkraft' : ''; },
+    'mx-rhythmus': () => 'Der Rhythmus ändert fast nichts',
+    'pt-card': () => 'Was nach einer Ampelfarbe wirklich passierte',
+    'sim-card': () => 'alle Werte, mit Kaufkosten, ohne Steuer',
+    'muster-card': () => 'Plus-Tage, Serien, Wochentage',
+  };
+  const setOpen = (el, on) => { el.toggleAttribute('data-open', !!on); const h = el.firstElementChild; if (h) h.setAttribute('aria-expanded', String(!!on)); };
+  const foldify = () => {
+    for (const id of FOLD) {
+      const el = $('#' + id); if (!el || !el.firstElementChild) continue;
+      if (el.classList.contains('mx-card')) el.querySelectorAll('table.mk-table').forEach((t) => { if (t.dataset.l) return; t.dataset.l = '1'; const hs = [...t.querySelectorAll('thead th')].map((x) => x.textContent.trim()); t.querySelectorAll('tbody tr').forEach((r) => [...r.children].forEach((c, i) => { if (hs[i]) c.dataset.l = hs[i]; })); });
+      el.querySelectorAll('table.mk-table').forEach((t) => { if (!t.closest('.mk-scroll')) { const w = document.createElement('div'); w.className = 'mk-scroll'; t.replaceWith(w); w.appendChild(t); } });
+      let h = el.firstElementChild;
+      if (h.tagName === 'P') continue;
+      if (h.tagName === 'H3' && SUM[id]) { let t = ''; try { t = SUM[id]() || ''; } catch (e) { t = ''; } const w = document.createElement('div'); w.className = 'mx-lage'; h.replaceWith(w); w.appendChild(h); if (t) w.insertAdjacentHTML('beforeend', `<span class="mk-sub mx-sum">${esc(t)}</span>`); h = w; }
+      el.setAttribute('data-mxc', ''); h.setAttribute('role', 'button'); h.tabIndex = 0;
+      setOpen(el, OPEN[id]);
+    }
+  };
+  const toggle = (el, on) => {
+    const id = el.id; OPEN[id] = on == null ? !OPEN[id] : on;
+    try { localStorage.setItem('mk-open-v1', JSON.stringify(OPEN)); } catch (e) { /* kein Speicher */ }
+    setOpen(el, OPEN[id]);
+    if (OPEN[id]) all();
+  };
+  root.addEventListener('click', (e) => { const h = e.target.closest && e.target.closest('[data-mxc] > :first-child'); if (h && !e.target.closest('button, a, select, input')) toggle(h.parentElement); });
+  root.addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-mxc] > :first-child, .mx-tog')) { e.preventDefault(); e.target.click(); } });
+  const goTo = (sel, view) => {
+    const run = () => { const el = $(sel); if (!el) return; if (el.hasAttribute('data-mxc') && !OPEN[el.id]) toggle(el, true); el.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+    const tab = view && $('.mk-tab[data-view="' + view + '"]');
+    if (tab && tab.getAttribute('aria-selected') !== 'true') { tab.click(); setTimeout(run, 150); } else run();
+  };
+  const AMP = { gruen: ['Trend intakt', 'ok'], gelb: ['Beobachten', 'warn'], rot: ['Vorsicht', 'bad'], kurz: ['zu wenig Daten', ''] };
+  const renderStrip = () => {
+    const sub = $('#today-sub'); if (!sub) return;
+    let el = $('#mx-strip');
+    if (!el) { el = document.createElement('div'); el.id = 'mx-strip'; el.className = 'mx-strip'; sub.insertAdjacentElement('afterend', el); el.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) goTo(b.dataset.go, b.dataset.view); }); }
+    if (!$('#mx-umfeld-h')) { const out = $('#today-out'); if (out) out.insertAdjacentHTML('afterend', '<h3 class="mk-subh" id="mx-umfeld-h">Marktumfeld im Detail</h3>'); }
+    const C = { ok: 'var(--color-ok)', warn: 'var(--color-warn)', bad: 'var(--color-bad)' };
+    const tile = (lab, t, s, c, go, view) => `<button class="mx-st" type="button" data-go="${go}"${view ? ` data-view="${view}"` : ''}${C[c] ? ` style="--mx-c:${C[c]}"` : ''}><small>${esc(lab)}</small><b>${esc(t)}</b><small>${esc(s || '')}</small></button>`;
+    const parts = [];
+    const A = Object.fromEntries(D('ampel_alle').map((r) => [r.asset, r]));
+    for (const a of ['BTC', 'GOLD']) { const r = A[a]; if (!r) continue; const m = AMP[r.ampel] || [r.ampel, '']; parts.push(tile(nm(a) + ' · Ampel', m[0], (r.d200 != null ? pct(r.d200, 0) + ' zur 200-Tage-Linie' : '30 Tage ' + pct(r.ret30, 0)), m[1], '#amp-list', 'ampel')); }
+    if (STAT.lage) parts.push(tile('Marktlage', STAT.lage.t, STAT.lage.s, STAT.lage.c, '#mx-lage'));
+    if (STAT.konj) parts.push(tile('Konjunktur (USA)', STAT.konj.t, STAT.konj.s, STAT.konj.c, '#mx-konj'));
+    if (STAT.zyk) parts.push(tile('Zyklus-Uhr', STAT.zyk.t, STAT.zyk.s, STAT.zyk.c, '#mx-zyk'));
+    if (STAT.ki) parts.push(tile('KI-Zyklus', STAT.ki.t, STAT.ki.s, STAT.ki.c, '#mx-ki', 'markt'));
+    el.innerHTML = parts.join('');
+  };
+  const jump = (viewId, items) => {
+    const v = $('#' + viewId); if (!v || v.querySelector(':scope > .mx-jump')) return;
+    const d = document.createElement('nav'); d.className = 'mx-jump'; d.setAttribute('aria-label', 'Springen zu');
+    d.innerHTML = '<span>Springen zu</span>' + items.map((x) => `<button class="amp-chip" type="button" data-go="${x[1]}">${x[0]}</button>`).join('');
+    d.addEventListener('click', (e) => { const b = e.target.closest('[data-go]'); if (b) goTo(b.dataset.go); });
+    v.prepend(d);
+  };
+  let CHO = false;
+  const chFix = () => {
+    const b = $('#ch-out'); if (!b) return;
+    b.querySelectorAll('.amp-gh').forEach((h) => {
+      if (h.dataset.mx || !/eher nicht/.test(h.textContent)) return;
+      const g = h.nextElementSibling; if (!g) return;
+      h.dataset.mx = '1'; h.classList.add('mx-tog'); h.setAttribute('role', 'button'); h.tabIndex = 0;
+      const set = () => { g.hidden = !CHO; h.setAttribute('aria-expanded', String(CHO)); };
+      h.addEventListener('click', () => { CHO = !CHO; set(); }); set();
+    });
+  };
+  const arrange = () => {
+    const sc = $('#sim-card'), stp = $('#mx-stopp');
+    if (sc && stp && stp.nextElementSibling !== sc) stp.insertAdjacentElement('afterend', sc);
+    jump('view-ampel', [['Liste', '#amp-list'], ['Gesamtbild', '#mx-gesamt'], ['Prognose-Test', '#pt-card'], ['Ausstiegsregeln', '#mx-stopp'], ['Regel-Test', '#sim-card']]);
+    jump('view-maerkte', [['Kurse', '#ueberblick'], ['Verläufe', '#verlauf'], ['Langzeit', '#mx-lang'], ['In Gold gemessen', '#mx-ag'], ['KI-Zyklus', '#mx-ki'], ['Kennzahlen', '#tbl-kz'], ['Wer mit wem', '#chart-corr'], ['Szenarien', '#szenarien']]);
+    chFix();
+  };
+
+  const all = () => { try { renderStrip(); } catch (e) { console.error(e); } for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderReal, renderRsi, renderStopp, renderStrip, arrange, foldify]) { try { f(); } catch (e) { console.error(e); } } };
   dash.onData(all);
   const dp = $('#depot-out');
-  if (dp && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(renderStress, 50); }).observe(dp, { childList: true }); }
+  if (dp && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => { renderStress(); foldify(); }, 50); }).observe(dp, { childList: true }); }
+  const co = $('#ch-out');
+  if (co && window.MutationObserver) new MutationObserver(chFix).observe(co, { childList: true });
   const sb = $('#stand-out');
-  if (sb && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => { renderStress(); renderRhythmus(); }, 50); }).observe(sb, { childList: true }); }
+  if (sb && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => { renderStress(); renderRhythmus(); foldify(); }, 50); }).observe(sb, { childList: true }); }
 })();
