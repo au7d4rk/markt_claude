@@ -2505,8 +2505,9 @@ date,asset,close,open,high,low,status
 2026-11-10,BTC,73720,,,,final
 2026-11-11,BTC,73964,,,,final
 2026-11-12,BTC,71343,,,,final
-2026-11-13,BTC,67993,,,,zwischenstand
-2026-11-14,BTC,67170,,,,zwischenstand
+2026-11-13,BTC,68249,,,,final
+2026-11-14,BTC,64128,,,,final
+2026-11-15,BTC,64819,,,,zwischenstand
 2020-01-01,DOGE,0.002019,0.002013,0.002106,0.001942,final
 2020-01-02,DOGE,0.001954,0.002017,0.002092,0.001945,final
 2020-01-03,DOGE,0.002046,0.001954,0.002092,0.001933,final
@@ -5015,8 +5016,9 @@ date,asset,close,open,high,low,status
 2026-11-10,DOGE,0.067959,,,,final
 2026-11-11,DOGE,0.067515,,,,final
 2026-11-12,DOGE,0.066418,,,,final
-2026-11-13,DOGE,0.06375,,,,zwischenstand
-2026-11-14,DOGE,0.06315,,,,zwischenstand
+2026-11-13,DOGE,0.064412,,,,final
+2026-11-14,DOGE,0.057252,,,,final
+2026-11-15,DOGE,0.05861,,,,zwischenstand
 2020-01-01,ETH,130.35,128.79,132.9,128.51,final
 2020-01-02,ETH,127.53,130.32,130.68,126.58,final
 2020-01-03,ETH,133.19,127.53,134.83,126.01,final
@@ -7523,8 +7525,9 @@ date,asset,close,open,high,low,status
 2026-11-10,ETH,2050.2,,,,final
 2026-11-11,ETH,2055.9,,,,final
 2026-11-12,ETH,2016.8,,,,final
-2026-11-13,ETH,1909.2,,,,zwischenstand
-2026-11-14,ETH,1903.3,,,,zwischenstand
+2026-11-13,ETH,1927.6,,,,final
+2026-11-14,ETH,1769.1,,,,final
+2026-11-15,ETH,1815.6,,,,zwischenstand
 2020-01-02,GOLD,1536.030389,1525.010957,1538.220212,1524.157127,final
 2020-01-03,GOLD,1555.999969,1536.050479,1560.399706,1534.935477,final
 2020-01-06,GOLD,1572.79531,1567.612059,1593.910028,1567.612059,final
@@ -15255,8 +15258,9 @@ date,asset,close,open,high,low,status
 2026-11-10,SOL,83.26,,,,final
 2026-11-11,SOL,83.321,,,,final
 2026-11-12,SOL,81.661,,,,final
-2026-11-13,SOL,78.45,,,,zwischenstand
-2026-11-14,SOL,75.86,,,,zwischenstand
+2026-11-13,SOL,78.096,,,,final
+2026-11-14,SOL,70.177,,,,final
+2026-11-15,SOL,71.29,,,,zwischenstand
 2020-01-02,SPX,3257.85,,,,final
 2020-01-03,SPX,3234.85,,,,final
 2020-01-06,SPX,3246.28,,,,final
@@ -19487,5 +19491,6 @@ date,asset,close,open,high,low,status
 2026-11-10,XRP,1.0557,,,,final
 2026-11-11,XRP,1.0528,,,,final
 2026-11-12,XRP,1.0399,,,,final
-2026-11-13,XRP,1.0116,,,,zwischenstand
-2026-11-14,XRP,0.9972,,,,zwischenstand
+2026-11-13,XRP,1.0094,,,,final
+2026-11-14,XRP,0.91303,,,,final
+2026-11-15,XRP,0.9501,,,,zwischenstand
