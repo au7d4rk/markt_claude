@@ -2509,8 +2509,9 @@ date,asset,close,open,high,low,status
 2026-11-14,BTC,64128,,,,final
 2026-11-15,BTC,65305,,,,final
 2026-11-16,BTC,64856,,,,final
-2026-11-17,BTC,64602,,,,zwischenstand
+2026-11-17,BTC,64894,,,,final
 2026-11-18,BTC,64571,,,,zwischenstand
+2026-11-19,BTC,63434,,,,zwischenstand
 2020-01-01,DOGE,0.002019,0.002013,0.002106,0.001942,final
 2020-01-02,DOGE,0.001954,0.002017,0.002092,0.001945,final
 2020-01-03,DOGE,0.002046,0.001954,0.002092,0.001933,final
@@ -5023,8 +5024,9 @@ date,asset,close,open,high,low,status
 2026-11-14,DOGE,0.057252,,,,final
 2026-11-15,DOGE,0.059856,,,,final
 2026-11-16,DOGE,0.058868,,,,final
-2026-11-17,DOGE,0.05891,,,,zwischenstand
+2026-11-17,DOGE,0.06003,,,,final
 2026-11-18,DOGE,0.0594,,,,zwischenstand
+2026-11-19,DOGE,0.05919,,,,zwischenstand
 2020-01-01,ETH,130.35,128.79,132.9,128.51,final
 2020-01-02,ETH,127.53,130.32,130.68,126.58,final
 2020-01-03,ETH,133.19,127.53,134.83,126.01,final
@@ -7535,8 +7537,9 @@ date,asset,close,open,high,low,status
 2026-11-14,ETH,1769.1,,,,final
 2026-11-15,ETH,1835.5,,,,final
 2026-11-16,ETH,1819.3,,,,final
-2026-11-17,ETH,1829.1,,,,zwischenstand
+2026-11-17,ETH,1823,,,,final
 2026-11-18,ETH,1810,,,,zwischenstand
+2026-11-19,ETH,1801.4,,,,zwischenstand
 2020-01-02,GOLD,1536.030389,1525.010957,1538.220212,1524.157127,final
 2020-01-03,GOLD,1555.999969,1536.050479,1560.399706,1534.935477,final
 2020-01-06,GOLD,1572.79531,1567.612059,1593.910028,1567.612059,final
@@ -9314,7 +9317,8 @@ date,asset,close,open,high,low,status
 2026-11-13,GOLD,3886.3,,,,final
 2026-11-16,GOLD,3853,,,,final
 2026-11-17,GOLD,3864.2,,,,final
-2026-11-18,GOLD,3787.7,,,,zwischenstand
+2026-11-18,GOLD,3741.9,,,,final
+2026-11-19,GOLD,3737.7,,,,zwischenstand
 2020-01-02,PLATIN,982.826163,968.412957,992.755929,968.412957,final
 2020-01-03,PLATIN,983.538298,982.776013,997.058827,982.053848,final
 2020-01-06,PLATIN,966.768026,990.820126,996.236362,958.954605,final
@@ -11091,7 +11095,8 @@ date,asset,close,open,high,low,status
 2026-11-13,PLATIN,1488.5,,,,final
 2026-11-16,PLATIN,1448,,,,final
 2026-11-17,PLATIN,1426.2,,,,final
-2026-11-18,PLATIN,1401.3,,,,zwischenstand
+2026-11-18,PLATIN,1360.1,,,,final
+2026-11-19,PLATIN,1369.4,,,,zwischenstand
 2020-01-02,SILBER,18.088755,17.92162,18.16906,17.857877,final
 2020-01-03,SILBER,18.088755,18.091766,18.339709,18.068679,final
 2020-01-06,SILBER,18.219251,18.229289,18.580625,18.088755,final
@@ -12869,7 +12874,8 @@ date,asset,close,open,high,low,status
 2026-11-13,SILBER,49.031,,,,final
 2026-11-16,SILBER,46.785,,,,final
 2026-11-17,SILBER,47.288,,,,final
-2026-11-18,SILBER,45.955,,,,zwischenstand
+2026-11-18,SILBER,44.999,,,,final
+2026-11-19,SILBER,45.325,,,,zwischenstand
 2020-04-10,SOL,0.9496,0.8198,1.33,0.7289,final
 2020-04-11,SOL,0.7973,0.9496,1.051,0.7689,final
 2020-04-12,SOL,0.883,0.7973,0.9403,0.7797,final
@@ -15280,8 +15286,9 @@ date,asset,close,open,high,low,status
 2026-11-14,SOL,70.177,,,,final
 2026-11-15,SOL,72.679,,,,final
 2026-11-16,SOL,71.505,,,,final
-2026-11-17,SOL,72.55,,,,zwischenstand
+2026-11-17,SOL,75.105,,,,final
 2026-11-18,SOL,74.9,,,,zwischenstand
+2026-11-19,SOL,74.81,,,,zwischenstand
 2020-01-02,SPX,3257.85,,,,final
 2020-01-03,SPX,3234.85,,,,final
 2020-01-06,SPX,3246.28,,,,final
@@ -17011,6 +17018,7 @@ date,asset,close,open,high,low,status
 2026-11-13,SPX,7561.7,,,,final
 2026-11-16,SPX,7416.6,,,,final
 2026-11-17,SPX,7340.5,,,,final
+2026-11-18,SPX,7323.6,,,,final
 2020-01-01,XRP,0.1929,0.1921,0.195,0.1919,final
 2020-01-02,XRP,0.188,0.1929,0.1931,0.1858,final
 2020-01-03,XRP,0.1923,0.188,0.1939,0.1846,final
@@ -19518,5 +19526,6 @@ date,asset,close,open,high,low,status
 2026-11-14,XRP,0.91303,,,,final
 2026-11-15,XRP,0.97461,,,,final
 2026-11-16,XRP,0.95467,,,,final
-2026-11-17,XRP,0.9606,,,,zwischenstand
+2026-11-17,XRP,0.98292,,,,final
 2026-11-18,XRP,0.9825,,,,zwischenstand
+2026-11-19,XRP,0.9759,,,,zwischenstand

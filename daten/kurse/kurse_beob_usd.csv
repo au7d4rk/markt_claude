@@ -2509,8 +2509,9 @@ date,asset,close,open,high,low,status
 2026-11-14,ADA,0.14752,,,,final
 2026-11-15,ADA,0.15525,,,,final
 2026-11-16,ADA,0.1529,,,,final
-2026-11-17,ADA,0.15368,,,,zwischenstand
+2026-11-17,ADA,0.1552,,,,final
 2026-11-18,ADA,0.15392,,,,zwischenstand
+2026-11-19,ADA,0.15351,,,,zwischenstand
 2020-01-01,LINK,1.797,1.76,1.85,1.75,final
 2020-01-02,LINK,1.731,1.797,1.809,1.702,final
 2020-01-03,LINK,1.797,1.731,1.826,1.7,final
@@ -5019,8 +5020,9 @@ date,asset,close,open,high,low,status
 2026-11-14,LINK,8.8727,,,,final
 2026-11-15,LINK,9.2833,,,,final
 2026-11-16,LINK,9.1232,,,,final
-2026-11-17,LINK,9.152,,,,zwischenstand
+2026-11-17,LINK,9.3084,,,,final
 2026-11-18,LINK,9.227,,,,zwischenstand
+2026-11-19,LINK,9.131,,,,zwischenstand
 2020-09-22,AVAX,5.25,5.014,7.007,4.031,final
 2020-09-23,AVAX,3.525,5.25,5.365,3.403,final
 2020-09-24,AVAX,4.59,3.525,4.892,3.406,final
@@ -7265,8 +7267,9 @@ date,asset,close,open,high,low,status
 2026-11-14,AVAX,7.0912,,,,final
 2026-11-15,AVAX,7.297,,,,final
 2026-11-16,AVAX,7.1074,,,,final
-2026-11-17,AVAX,7.177,,,,zwischenstand
+2026-11-17,AVAX,7.284,,,,final
 2026-11-18,AVAX,7.181,,,,zwischenstand
+2026-11-19,AVAX,7.061,,,,zwischenstand
 2020-01-02,NDX,8872.22,8802.22,8873.63,8786.9,final
 2020-01-03,NDX,8793.9,8755.17,8843.65,8755.17,final
 2020-01-06,NDX,8848.52,8713.89,8849.98,8713.89,final
@@ -8996,6 +8999,7 @@ date,asset,close,open,high,low,status
 2026-11-13,NDX,27944,,,,final
 2026-11-16,NDX,27197,,,,final
 2026-11-17,NDX,27002,,,,final
+2026-11-18,NDX,27116,,,,final
 2020-01-02,NVDA,5.97288,5.94402,5.97288,5.8933,final
 2020-01-03,NVDA,5.87724,5.85308,5.92105,5.82812,final
 2020-01-06,NVDA,5.90189,5.78358,5.90707,5.75741,final
@@ -10725,6 +10729,7 @@ date,asset,close,open,high,low,status
 2026-11-13,NVDA,162.85,,,,final
 2026-11-16,NVDA,156.14,,,,final
 2026-11-17,NVDA,155.46,,,,final
+2026-11-18,NVDA,150.96,,,,final
 2021-04-14,COIN,328.28,381,429.54,310,final
 2021-04-15,COIN,322.75,348.9,349.2,317.2701,final
 2021-04-16,COIN,342,327.5,345.99,321.03,final
@@ -12132,6 +12137,7 @@ date,asset,close,open,high,low,status
 2026-11-13,COIN,127.65,,,,final
 2026-11-16,COIN,119.84,,,,final
 2026-11-17,COIN,115.02,,,,final
+2026-11-18,COIN,110.51,,,,final
 2025-10-06,PALLADIUM,1326.8,,,,final
 2025-10-07,PALLADIUM,1347.6,,,,final
 2025-10-08,PALLADIUM,1454.2,,,,final
@@ -12414,7 +12420,8 @@ date,asset,close,open,high,low,status
 2026-11-13,PALLADIUM,1006,,,,final
 2026-11-16,PALLADIUM,971.8,,,,final
 2026-11-17,PALLADIUM,974.6,,,,final
-2026-11-18,PALLADIUM,952,,,,zwischenstand
+2026-11-18,PALLADIUM,950.1,,,,final
+2026-11-19,PALLADIUM,961,,,,zwischenstand
 2020-01-02,AAPL,72.4006,71.4084,72.4606,71.1545,final
 2020-01-03,AAPL,71.699,71.6304,72.4567,71.4724,final
 2020-01-06,AAPL,72.2661,70.816,72.3055,70.5707,final
@@ -14144,6 +14151,7 @@ date,asset,close,open,high,low,status
 2026-11-13,AAPL,356.27,,,,final
 2026-11-16,AAPL,352.78,,,,final
 2026-11-17,AAPL,351.91,,,,final
+2026-11-18,AAPL,352.45,,,,final
 2020-01-02,MSFT,153.613,151.872,153.708,151.441,final
 2020-01-03,MSFT,151.726,151.432,153.006,151.179,final
 2020-01-06,MSFT,152.118,150.224,152.185,149.685,final
@@ -15873,6 +15881,7 @@ date,asset,close,open,high,low,status
 2026-11-13,MSFT,523.88,,,,final
 2026-11-16,MSFT,517.99,,,,final
 2026-11-17,MSFT,506.24,,,,final
+2026-11-18,MSFT,508.29,,,,final
 2020-01-02,AMZN,94.9005,93.75,94.9005,93.2075,final
 2020-01-03,AMZN,93.7485,93.225,94.31,93.225,final
 2020-01-06,AMZN,95.144,93,95.1845,93,final
@@ -17602,6 +17611,7 @@ date,asset,close,open,high,low,status
 2026-11-13,AMZN,266.66,,,,final
 2026-11-16,AMZN,257.75,,,,final
 2026-11-17,AMZN,257.89,,,,final
+2026-11-18,AMZN,267.74,,,,final
 2020-01-02,DAX,13385.9,13233.7,13425,13225.1,final
 2020-01-03,DAX,13219.1,13266.3,13282.7,13120.7,final
 2020-01-06,DAX,13126.9,13085.4,13143.1,12948.1,final
@@ -19355,6 +19365,7 @@ date,asset,close,open,high,low,status
 2026-11-13,DAX,26750,,,,final
 2026-11-16,DAX,26599,,,,final
 2026-11-17,DAX,26045,,,,final
+2026-11-18,DAX,25736,,,,final
 2020-01-01,BNB,13.71,13.69,13.89,13.67,final
 2020-01-02,BNB,13.03,13.69,13.75,12.99,final
 2020-01-03,BNB,13.58,13.03,13.76,12.98,final
@@ -21865,8 +21876,9 @@ date,asset,close,open,high,low,status
 2026-11-14,BNB,581.38,,,,final
 2026-11-15,BNB,596.90,581.90,599.50,566.11,final
 2026-11-16,BNB,590.69,597.10,597.90,583.90,final
-2026-11-17,BNB,591.66,,,,zwischenstand
+2026-11-17,BNB,596.03,,,,final
 2026-11-18,BNB,592.02,,,,zwischenstand
+2026-11-19,BNB,587.4,,,,zwischenstand
 2020-01-02,GOOGL,68.1868,67.177,68.1868,67.0813,final
 2020-01-03,GOOGL,67.8302,67.1565,68.4395,67.1227,final
 2020-01-06,GOOGL,69.6381,67.3373,69.6635,67.3061,final
@@ -23596,6 +23608,7 @@ date,asset,close,open,high,low,status
 2026-11-13,GOOGL,295.77,,,,final
 2026-11-16,GOOGL,283.72,,,,final
 2026-11-17,GOOGL,280.2,,,,final
+2026-11-18,GOOGL,282.44,,,,final
 2020-01-02,EUNL,56.7,56.6,56.934,56.562,final
 2020-01-03,EUNL,56.68,56.586,56.782,56.34,final
 2020-01-06,EUNL,56.55,56.462,56.576,56.086,final
