@@ -17,7 +17,7 @@ for n in ('werte.csv','beob_meta.csv','welt_meta.csv'):
         try: STOPP[r['asset']]=float(r['stopp'])
         except Exception: pass
 KAUF={r['asset'] for r in rd('bp_verf.csv') if r.get('kaufbar','').strip().lower()=='ja'}
-KRYPTO={'BTC','ETH','SOL','XRP','DOGE','ADA','LINK','AVAX','BNB'}
+KRYPTO={'BTC','ETH','SOL','XRP','DOGE','ADA','LINK','AVAX','BNB','NEAR','HYPE','POL','ZEC'}
 SER={};ORD=[];HAUPT=set()
 for n in ('kurse_usd.csv','kurse_beob_usd.csv','kurse_welt.csv'):
     for r in rd(n):

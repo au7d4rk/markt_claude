@@ -2017,7 +2017,7 @@ summary { cursor: pointer; }
  const lastOf = {}, nm = {};
  for (const r of dash.data('kurse_usd').data.concat(dash.data('kurse_beob').data, dash.data('kurse_welt').data)) if (!lastOf[r.asset] || r.date > lastOf[r.asset].d) lastOf[r.asset] = { d: r.date, s: r.status };
  for (const m of dash.data('werte').data.concat(dash.data('beob_meta').data, dash.data('welt_meta').data)) nm[m.asset] = m.name;
- const CR = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB']);
+ const CR = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB', 'NEAR', 'HYPE', 'POL', 'ZEC']);
  for (const m of dash.data('welt_meta').data) if (m.klasse === 'Krypto') CR.add(m.asset);
  const now = new Date(), todayMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
  const ageOf = (a, d) => {
@@ -2413,7 +2413,8 @@ summary { cursor: pointer; }
  if (status(['beob']) === 'ok') for (const r of dash.data('beob').data) all[r.asset] = r;
  const kzm = Object.fromEntries(dash.data('kennzahlen').data.map((r) => [r.asset, r]));
  const VF = status(['bp_verf']) === 'ok' ? dash.data('bp_verf').data.filter((r) => r.kaufbar === 'ja').map((r) => r.asset) : null;
- const ideas = Object.values(all).filter((r) => r.ampel === 'gruen' && Number(r.risiko) <= 4 && (!VF || VF.includes(r.asset))).sort((p, q2) => q2.score - p.score || p.risiko - q2.risiko).slice(0, 3);
+ const oldR = (r) => { const d = r.date || (kzm[r.asset] || {}).stand; if (!d) return false; const cr = ['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB', 'NEAR', 'HYPE', 'POL', 'ZEC'].includes(r.asset); let n = 0; for (let t = Date.parse(d + 'T00:00:00Z') + 864e5, e = Date.now(); t <= e; t += 864e5) { const w = new Date(t).getUTCDay(); if (cr || (w !== 0 && w !== 6)) n++; } return n >= 3; };
+ const ideas = Object.values(all).filter((r) => r.ampel === 'gruen' && Number(r.risiko) <= 4 && (!VF || VF.includes(r.asset)) && !oldR(r)).sort((p, q2) => q2.score - p.score || p.risiko - q2.risiko).slice(0, 3);
  parts.push(card('Kaufideen mit grüner Ampel', ideas.length ? 'bei Bitpanda kaufbar, bis Risiko 4' : 'keine', ideas.length ? '<div class="td-list">' + ideas.map((r) => itm('ok', `<b>${esc(nm(r.asset))}</b> · Risiko ${r.risiko} von 5`, `30 Tage ${pct(r.ret30 != null ? r.ret30 : (kzm[r.asset] || {}).ret30)}`)).join('') + '</div><p class="mk-sub">Nur eine Prüfliste. Wie viel du einsetzt und wie du mischst, legst du im Plan fest.</p><div><button class="mk-btn" type="button" data-go="plan" data-start="1">Plan für heute starten</button></div>' : '<p class="mk-sub">Heute zeigt kein Wert bis Risiko 4 eine grüne Ampel. Abwarten ist auch eine Entscheidung.</p>'));
  parts.push(card('Heute Geld investieren?', '', `<p class="mk-sub">Wähle den Betrag. Der Plan teilt ihn nach deiner Risikostufe (${PL.stufe} von 7) in drei Monatsraten, rechnet die Kosten bei Bitpanda ein und schlägt wenige Werte mit mindestens rund 25 € vor. Die Ampel dient dabei nur als Lagebild, entscheidend sind Kosten, Streuung und Risiko.</p><div class="td-btns">${[100, 250, 500, 1000].map((v) => `<button class="mk-btn" type="button" data-eins="${v}">${v} € planen</button>`).join('')}</div>`));
  out.innerHTML = parts.join('');
@@ -2666,7 +2667,7 @@ summary { cursor: pointer; }
  description: 'Je Wert aus den Tageskursen seit 2020: Abstand zur 200-Tage-Linie, Abstand zum 52-Wochen-Hoch, Schwankung der letzten 30 Tage (hochgerechnet auf ein Jahr) und Abstand zur 200-Wochen-Linie (grob aus den Tageskursen).',
  inputs: ['kurse_usd', 'kurse_beob'],
  fn: (a, b) => {
- const CRY = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB']);
+ const CRY = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB', 'NEAR', 'HYPE', 'POL', 'ZEC']);
  const by = {};
  for (const r of a.concat(b)) (by[r.asset] = by[r.asset] || []).push({ d: r.date, c: Number(r.close) });
  const out = [], rd = (v) => Math.round(v * 1e4) / 1e4;
@@ -2689,7 +2690,7 @@ summary { cursor: pointer; }
  inputs: ['signale', 'kennzahlen', 'beob', 'ampel_welt', 'indikatoren'],
  fn: (sig, kz, bo, wl, ind) => {
  const im = Object.fromEntries(ind.map((r) => [r.asset, r])), ix = (o) => { const i = im[o.asset]; return i ? { ...o, d200: i.d200, h52: i.h52, vol: i.vol, w200: i.w200 } : o; };
- const CRY = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB']);
+ const CRY = new Set(['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB', 'NEAR', 'HYPE', 'POL', 'ZEC']);
  const out = [], kzm = Object.fromEntries(kz.map((r) => [r.asset, r]));
  for (const s of sig) { const k = kzm[s.asset] || {}; out.push(ix({ asset: s.asset, name: s.name, bereich: 'Hauptwerte', krypto: CRY.has(s.asset) ? 1 : 0, einheit: '€', date: k.stand, last: k.last, chg1: k.chg1, ret30: k.ret30, rsi: k.rsi == null ? null : Math.round(k.rsi), score: s.score, ampel: s.ampel, grund: s.gruende, src: 'haupt' })); }
  for (const s of bo) out.push(ix({ asset: s.asset, name: s.name, bereich: 'Beobachtung', krypto: CRY.has(s.asset) ? 1 : 0, einheit: '€', date: s.date, last: s.last, chg1: s.chg, ret30: s.ret30, rsi: null, score: s.score, ampel: s.ampel, grund: s.gruende, src: 'beob' }));

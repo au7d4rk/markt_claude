@@ -20,11 +20,15 @@ Kein persönliches Depot: Bestände werden nur im Browser gespeichert und kommen
 | `daten/langzeit/` | `langzeit_sp.csv`, `gold_lang.csv`, `rezessionen.csv`, `vpi_at.csv` | S&P 500 und CAPE seit 1871, Gold seit 1833, US-Rezessionen (NBER), österreichische Inflation |
 | `daten/stammdaten/` | `werte.csv`, `zusatz.csv` | Stammdaten je Wert (Klasse, Risiko, Bitpanda-Kosten) |
 | `seite/` | `index.html`, `extra.js` | Quelltext der Dashboard-Seite |
-| `skripte/` | `grok_sync.py` | Abgleich mit dem Repo au7d4rk/marktdaten |
+| `skripte/` | `grok_sync.py`, `ampel_log.py` | Abgleich mit dem Repo au7d4rk/marktdaten (Kurse, Stimmung, EUR/USD) und tägliches Ampel-Protokoll |
 
 ## Ampel-Regel in Kürze
 
 Je Wert ein Punktestand aus Trend (Kurs gegenüber dem 20-Tage-Schnitt), 30-Tage-Veränderung und Rückgang vom Hoch. Details stehen im Quelltext `seite/index.html` (Calc `ampel_serie`). Seit 05.11.2026 gibt RSI keinen Abzug mehr (eigener Test: bei Krypto folgte auf RSI über 70 im Schnitt eher Stärke). Grün = Trend intakt, Gelb = gemischt, Rot = Trend gebrochen.
+
+## Veraltete Kurse
+
+Ein Wert, dessen letzter Kurs 3 Handelstage (Krypto: 3 Kalendertage) oder älter ist, wird auf der Seite grau als „veraltet“ gekennzeichnet. Er bekommt keine Ampelfarbe und fehlt in Kaufideen, Chancen und Gesamtbild.
 
 ## Für den Vergleich mit Grok
 

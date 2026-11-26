@@ -13,6 +13,8 @@
   const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v == null ? d : v; } catch (e) { return d; } };
   const NAMES = { BTC: 'Bitcoin', ETH: 'Ethereum', SOL: 'Solana', XRP: 'XRP', DOGE: 'Dogecoin', GOLD: 'Gold', SILBER: 'Silber', PLATIN: 'Platin', PALLADIUM: 'Palladium', SPX: 'S&P 500', ADA: 'Cardano', LINK: 'Chainlink', AVAX: 'Avalanche', BNB: 'BNB', NDX: 'Nasdaq 100', NVDA: 'Nvidia', COIN: 'Coinbase', AAPL: 'Apple', MSFT: 'Microsoft', AMZN: 'Amazon', GOOGL: 'Alphabet', EUNL: 'MSCI-World-ETF', SXR8: 'S&P-500-ETF', DAX: 'DAX' };
   const nm = (a) => NAMES[a] || a;
+  // Alter eines Kurses in Handelstagen (Krypto: Kalendertage), wie die Ampel-Liste
+  const ageOf = (r) => { if (!r || !r.date) return 0; let n = 0; const now = new Date(), end = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()); for (let t = Date.parse(r.date + 'T00:00:00Z') + 864e5; t <= end; t += 864e5) { const w = new Date(t).getUTCDay(); if (r.krypto || (w !== 0 && w !== 6)) n++; } return n; };
 
   // ---------- Berechnungen ----------
   dash.calc('marktlage', {
@@ -501,6 +503,11 @@
 .mx-st { font: inherit; color: inherit; text-align: left; min-width: 0; display: flex; flex-direction: column; gap: 2px; background: var(--color-panel); border: 1px solid var(--color-border-line); border-left: 4px solid var(--mx-c, var(--color-border-line)); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); cursor: pointer; }
 .mx-st:hover { border-color: var(--color-fg); border-left-color: var(--mx-c, var(--color-fg)); }
 .mx-st small { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.35; }
+.amp-old .amp-name small::after { content: ' · veraltet'; color: var(--color-bad); }
+.mx-stale { margin: 0 0 var(--space-3, 0.75rem); padding: 0.5rem 0.85rem; border: 1px solid var(--color-border-line); border-left: 3px solid var(--color-warn); border-radius: 6px; background: var(--color-panel); }
+.mx-stale summary { cursor: pointer; font-weight: 500; }
+.mx-stale p { margin: 0.5rem 0 0; }
+.mx-stale ul { margin: 0.5rem 0 0; padding-left: 1.1rem; columns: 2 16rem; font-size: var(--cds-font-size-caption); }
 .mx-st b { font-weight: 500; font-size: 1.15rem; line-height: 1.25; }
 .mx-jump { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); align-items: center; }
 .mx-jump > span { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin-right: var(--cds-gap-xs); }
@@ -574,7 +581,8 @@
     el.setAttribute('data-source', 'gesamtbild');
     if (!ok(['gesamtbild'])) { wait(el, ['gesamtbild', 'ampel_alle', 'marktlage', 'stimmung_lage']); return; }
     const MINE = ['BTC', 'GOLD'], ORD = { 'einig aufwärts': 0, offen: 1, uneinig: 2, 'einig abwärts': 3 };
-    const rows = dash.data('gesamtbild').data.slice().sort((a, b) => (MINE.includes(b.asset) - MINE.includes(a.asset)) || ORD[a.konsens] - ORD[b.konsens] || String(a.name).localeCompare(String(b.name)));
+    const all0 = dash.data('gesamtbild').data, old0 = all0.filter((r) => ageOf(r) >= 3);
+    const rows = all0.filter((r) => ageOf(r) < 3).sort((a, b) => (MINE.includes(b.asset) - MINE.includes(a.asset)) || ORD[a.konsens] - ORD[b.konsens] || String(a.name).localeCompare(String(b.name)));
     const n = (k) => rows.filter((r) => r.konsens === k).length;
     const lab = (v) => (v > 0 ? '<span class="up">Rückenwind</span>' : v < 0 ? '<span class="down">Gegenwind</span>' : 'neutral');
     const amp = { gruen: '<span class="up">grün</span>', gelb: 'gelb', rot: '<span class="down">rot</span>' };
@@ -584,7 +592,7 @@
       + `<p class="mk-sub">Zwei getrennte Säulen: der <b>Trend</b> aus den Kursen des Werts (die Ampel) und das <b>Umfeld</b> aus Daten, die nicht vom Kurs abhängen (Kredit-Spreads, Zinsen, Liquidität, VIX, Marktbreite; bei Krypto zusätzlich Bitcoin-spezifische Faktoren). Nur wenn beide in dieselbe Richtung zeigen, gilt ein Wert als „einig“. Heute: ${n('einig aufwärts')} einig aufwärts, ${n('einig abwärts')} einig abwärts, ${n('uneinig')} uneinig, ${n('offen')} offen. Die Chart-Spalte ist Info ohne Punkte. Wie gut das trägt, wird erst nach einigen Wochen Protokoll messbar.</p>`
       + '<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Wert</th><th>Trend (Ampel)</th><th>Umfeld</th><th>Gesamtbild</th><th>Chart-Info</th></tr></thead><tbody>'
       + rows.map((r) => `<tr><td>${esc(r.name || nm(r.asset))}${MINE.includes(r.asset) ? ' ★' : ''}</td><td>${amp[r.ampel] || esc(r.ampel)}</td><td>${lab(r.umfeld)} (${r.umfeld_punkte > 0 ? '+' : ''}${r.umfeld_punkte})</td><td>${kon[r.konsens]}</td><td class="txt-s">${esc(chart(r))}</td></tr>`).join('')
-      + '</tbody></table></div><p class="mk-sub">★ = deine Werte. Umfeld-Punkte: Summe der Marktlage, ab +2 Rückenwind, ab −2 Gegenwind.</p>';
+      + '</tbody></table></div><p class="mk-sub">★ = deine Werte. Umfeld-Punkte: Summe der Marktlage, ab +2 Rückenwind, ab −2 Gegenwind.' + (old0.length ? ' ' + old0.length + ' Werte mit veraltetem Kurs (3 Tage oder älter) sind hier nicht aufgeführt.' : '') + '</p>';
   };
 
   const renderKonjunktur = () => {
@@ -858,7 +866,7 @@
   const FOLD = ['mx-lage', 'mx-konj', 'mx-zyk', 'mx-gesamt', 'mx-rsi', 'mx-stopp', 'mx-lang', 'mx-ag', 'mx-bg', 'mx-ki', 'mx-stress', 'mx-rhythmus', 'mx-baer', 'mx-real', 'pt-card', 'sim-card', 'muster-card'];
   const D = (id) => (ok([id]) ? dash.data(id).data : []);
   const SUM = {
-    'mx-gesamt': () => { const R = D('gesamtbild'), n = (k) => R.filter((r) => r.konsens === k).length; return R.length ? `${n('einig aufwärts')} einig aufwärts, ${n('einig abwärts')} einig abwärts, ${n('offen') + n('uneinig')} offen` : ''; },
+    'mx-gesamt': () => { const R = D('gesamtbild').filter((r) => ageOf(r) < 3), n = (k) => R.filter((r) => r.konsens === k).length; return R.length ? `${n('einig aufwärts')} einig aufwärts, ${n('einig abwärts')} einig abwärts, ${n('offen') + n('uneinig')} offen` : ''; },
     'mx-rsi': () => 'Test seit 2020: danach ging es im Schnitt eher weiter',
     'mx-stopp': () => { const R = D('stopp_test').filter((r) => r.asset === stoppAsset), h = R.find((r) => r.regel === 'halten'); if (!h) return ''; const k = R.filter((r) => r !== h && r.endwert > h.endwert).length; return `${nm(stoppAsset)}: ${k} von ${R.length - 1} Regeln besser als Halten`; },
     'mx-lang': () => { const now = D('rueckgaenge_lang').find((r) => r.hoch === 'heute'), ch = D('cape_rueckblick').find((c) => c.heute); return (now ? 'heute ' + pct(now.tiefe, 1) + ' unter dem Hoch' : '') + (ch ? ' · Shiller-KGV ' + fmtN(ch.cape_heute, 1) : ''); },
@@ -912,7 +920,20 @@
     if (STAT.konj) parts.push(tile('Konjunktur (USA)', STAT.konj.t, STAT.konj.s, STAT.konj.c, '#mx-konj'));
     if (STAT.zyk) parts.push(tile('Zyklus-Uhr', STAT.zyk.t, STAT.zyk.s, STAT.zyk.c, '#mx-zyk'));
     if (STAT.ki) parts.push(tile('KI-Zyklus', STAT.ki.t, STAT.ki.s, STAT.ki.c, '#mx-ki', 'markt'));
+    const AR = D('ampel_alle').filter((r) => r.ampel !== 'kurz'), nOld = AR.filter((r) => ageOf(r) >= 3).length;
+    if (AR.length) parts.push(tile('Datenstand', nOld ? nOld + ' veraltet' : 'alles aktuell', nOld ? 'von ' + AR.length + ' Werten, Liste öffnen' : AR.length + ' Werte', nOld ? 'warn' : 'ok', '#mx-stale', 'ampel'));
     el.innerHTML = parts.join('');
+  };
+  const renderStale = () => {
+    const lead = $('#amp-lead'); if (!lead || !ok(['ampel_alle'])) return;
+    const rows = D('ampel_alle').filter((r) => r.ampel !== 'kurz' && ageOf(r) >= 3).sort((a, b) => ageOf(b) - ageOf(a) || String(a.name).localeCompare(String(b.name), 'de'));
+    let el = $('#mx-stale');
+    if (!el) { el = document.createElement('details'); el.id = 'mx-stale'; el.className = 'mx-stale'; lead.insertAdjacentElement('afterend', el); }
+    el.hidden = !rows.length;
+    const fd = (d) => (d ? d.slice(8, 10) + '.' + d.slice(5, 7) + '.' : '–');
+    el.innerHTML = `<summary>${rows.length} ${rows.length === 1 ? 'Wert hat' : 'Werte haben'} einen veralteten Kurs (3 Tage oder älter)</summary>`
+      + '<p class="mk-sub">Diese Werte bekommen keine Ampelfarbe und fehlen in Kaufideen, Chancen und Gesamtbild. In der Liste stehen sie grau. Sie kommen wieder dazu, sobald ein neuer Kurs eintrifft; die automatische Datenquelle liefert sie nicht täglich.</p>'
+      + '<ul>' + rows.map((r) => `<li>${esc(r.name || nm(r.asset))}: Stand ${fd(r.date)} (vor ${ageOf(r)} Tagen)</li>`).join('') + '</ul>';
   };
   const jump = (viewId, items) => {
     const v = $('#' + viewId); if (!v || v.querySelector(':scope > .mx-jump')) return;
@@ -940,7 +961,7 @@
     chFix();
   };
 
-  const all = () => { try { renderStrip(); } catch (e) { console.error(e); } for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderReal, renderRsi, renderStopp, renderStrip, arrange, foldify]) { try { f(); } catch (e) { console.error(e); } } };
+  const all = () => { try { renderStrip(); } catch (e) { console.error(e); } for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderReal, renderRsi, renderStopp, renderStale, renderStrip, arrange, foldify]) { try { f(); } catch (e) { console.error(e); } } };
   dash.onData(all);
   const dp = $('#depot-out');
   if (dp && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => { renderStress(); foldify(); }, 50); }).observe(dp, { childList: true }); }

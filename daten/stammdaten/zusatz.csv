@@ -11,3 +11,19 @@ TSLA,Tesla (Einzelaktie),aktie,4,0.56,0.005,0.005,Aktie in Bruchteilen
 COIN,Coinbase (Einzelaktie),aktie,5,0.72,0.005,0.005,Aktie in Bruchteilen
 BCI,Krypto-Index (Top 10),krypto,4,0.65,0.0199,0.0199,Krypto-Index-Sparplan
 CHN,China-ETF (MSCI China),aktie,4,0.23,0.005,0.005,"ETF-Sparplan, z. B. auf den MSCI China"
+MU,Micron,aktie,5,0.85,0.005,0.005,Aktie in Bruchteilen
+KO,Coca-Cola,aktie,3,0.19,0.005,0.005,Aktie in Bruchteilen
+MSTR,Strategy (MicroStrategy),aktie,5,0.81,0.005,0.005,Aktie in Bruchteilen
+SPOT,Spotify,aktie,4,0.45,0.005,0.005,Aktie in Bruchteilen
+ISRG,Intuitive Surgical,aktie,4,0.38,0.005,0.005,Aktie in Bruchteilen
+MELI,MercadoLibre,aktie,4,0.43,0.005,0.005,Aktie in Bruchteilen
+CRWD,CrowdStrike,aktie,4,0.56,0.005,0.005,Aktie in Bruchteilen
+FSLR,First Solar,aktie,4,0.55,0.005,0.005,Aktie in Bruchteilen
+NVO,Novo Nordisk,aktie,4,0.46,0.005,0.005,Aktie in Bruchteilen
+AVGO,Broadcom,aktie,4,0.5,0.005,0.005,"Kanadisches Hinterlegungszertifikat (CDR), ca. 1/40 Aktie"
+NEAR,NEAR Protocol,krypto,5,1.08,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
+HYPE,Hyperliquid,krypto,5,0.82,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
+POL,Polygon,krypto,5,0.62,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
+ZEC,Zcash,krypto,5,1.25,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
+IQQW,iShares MSCI World (IQQW),aktie,3,0.12,0.005,0.005,ETF in Bruchteilen
+EXX6,"iShares Dt. Staatsanleihen 10,5+ J. (EXX6)",aktie,3,0.08,0.005,0.005,ETF in Bruchteilen
