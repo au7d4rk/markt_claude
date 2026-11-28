@@ -27,3 +27,11 @@ POL,Polygon,krypto,5,0.62,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
 ZEC,Zcash,krypto,5,1.25,0.0299,0.0299,Krypto (Einzelkauf bei Bitpanda)
 IQQW,iShares MSCI World (IQQW),aktie,3,0.12,0.005,0.005,ETF in Bruchteilen
 EXX6,"iShares Dt. Staatsanleihen 10,5+ J. (EXX6)",aktie,3,0.08,0.005,0.005,ETF in Bruchteilen
+L8I3,"Geldmarkt Euro (Amundi EUR Overnight, L8I3)",aktie,1,0.003,0.005,0.005,ETF in Bruchteilen
+PRAR,"Euro-Staatsanleihen (Amundi Prime, PRAR)",aktie,2,0.045,0.005,0.005,ETF in Bruchteilen
+IUST,"US-Inflationsanleihen TIPS (iShares, IUST)",aktie,2,0.053,0.005,0.005,ETF in Bruchteilen
+VGWD,"Globale Dividenden (Vanguard, VGWD)",aktie,3,0.095,0.005,0.005,ETF in Bruchteilen
+XMLC,"Wasser-Aktien (L&G Clean Water, XMLC)",aktie,3,0.149,0.005,0.005,ETF in Bruchteilen
+V9N,"Rechenzentren (Global X Data Center, V9N)",aktie,4,0.266,0.005,0.005,ETF in Bruchteilen
+ETLX,"Goldminen (L&G Gold Mining, ETLX)",aktie,5,0.516,0.005,0.005,ETF in Bruchteilen
+SXRV,"Nasdaq-100-ETF (iShares, SXRV)",aktie,3,0.208,0.005,0.005,ETF in Bruchteilen

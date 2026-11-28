@@ -2414,7 +2414,7 @@ summary { cursor: pointer; }
  const kzm = Object.fromEntries(dash.data('kennzahlen').data.map((r) => [r.asset, r]));
  const VF = status(['bp_verf']) === 'ok' ? dash.data('bp_verf').data.filter((r) => r.kaufbar === 'ja').map((r) => r.asset) : null;
  const oldR = (r) => { const d = r.date || (kzm[r.asset] || {}).stand; if (!d) return false; const cr = ['BTC', 'ETH', 'SOL', 'XRP', 'DOGE', 'ADA', 'LINK', 'AVAX', 'BNB', 'NEAR', 'HYPE', 'POL', 'ZEC'].includes(r.asset); let n = 0; for (let t = Date.parse(d + 'T00:00:00Z') + 864e5, e = Date.now(); t <= e; t += 864e5) { const w = new Date(t).getUTCDay(); if (cr || (w !== 0 && w !== 6)) n++; } return n >= 3; };
- const ideas = Object.values(all).filter((r) => r.ampel === 'gruen' && Number(r.risiko) <= 4 && (!VF || VF.includes(r.asset)) && !oldR(r)).sort((p, q2) => q2.score - p.score || p.risiko - q2.risiko).slice(0, 3);
+ const ideas = Object.values(all).filter((r) => r.ampel === 'gruen' && Number(r.risiko) <= 4 && (!VF || VF.includes(r.asset)) && !oldR(r) && r.asset !== 'L8I3').sort((p, q2) => q2.score - p.score || p.risiko - q2.risiko).slice(0, 3);
  parts.push(card('Kaufideen mit grüner Ampel', ideas.length ? 'bei Bitpanda kaufbar, bis Risiko 4' : 'keine', ideas.length ? '<div class="td-list">' + ideas.map((r) => itm('ok', `<b>${esc(nm(r.asset))}</b> · Risiko ${r.risiko} von 5`, `30 Tage ${pct(r.ret30 != null ? r.ret30 : (kzm[r.asset] || {}).ret30)}`)).join('') + '</div><p class="mk-sub">Nur eine Prüfliste. Wie viel du einsetzt und wie du mischst, legst du im Plan fest.</p><div><button class="mk-btn" type="button" data-go="plan" data-start="1">Plan für heute starten</button></div>' : '<p class="mk-sub">Heute zeigt kein Wert bis Risiko 4 eine grüne Ampel. Abwarten ist auch eine Entscheidung.</p>'));
  parts.push(card('Heute Geld investieren?', '', `<p class="mk-sub">Wähle den Betrag. Der Plan teilt ihn nach deiner Risikostufe (${PL.stufe} von 7) in drei Monatsraten, rechnet die Kosten bei Bitpanda ein und schlägt wenige Werte mit mindestens rund 25 € vor. Die Ampel dient dabei nur als Lagebild, entscheidend sind Kosten, Streuung und Risiko.</p><div class="td-btns">${[100, 250, 500, 1000].map((v) => `<button class="mk-btn" type="button" data-eins="${v}">${v} € planen</button>`).join('')}</div>`));
  out.innerHTML = parts.join('');
@@ -2527,7 +2527,7 @@ summary { cursor: pointer; }
  const usable = rows.filter((r) => r.st !== 'alt' && r.st !== 'kurz');
  const top = usable.filter((r) => r.grp === 'top'), beo = usable.filter((r) => r.grp === 'beo'), nein = rows.filter((r) => !usable.includes(r) || r.grp === 'nein');
  const btc = rows.find((r) => r.asset === 'BTC');
- const cand = top.filter((r) => r.asset !== 'BTC');
+ const cand = top.filter((r) => r.asset !== 'BTC' && r.asset !== 'L8I3');
  const minOf = (r) => (r.stock ? 25 : 10);
  let n = Math.min(4, cand.length);
  while (n > 0 && rest / n < Math.max(...cand.slice(0, n).map(minOf))) n--;

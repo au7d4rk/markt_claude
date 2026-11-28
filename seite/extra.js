@@ -724,6 +724,39 @@
     if (gl) { const G = dash.data('gleichlauf_btc').data; lineChart(el.querySelector('#mx-gl-chart'), [{ name: 'mit Nasdaq 100', pts: G.map((r) => ({ d: toD(r.date), v: r.nasdaq })) }, { name: 'mit Gold', pts: G.map((r) => ({ d: toD(r.date), v: r.gold })) }], { domain: [-0.6, 1], zero: 0, h: 220, label: 'Gleichlauf von Bitcoin mit Nasdaq und Gold', yfmt: (v) => fmtN(v, 1) }); }
   };
 
+  // Rückgang vom Allzeithoch: Bitcoin und Gold (Tageskurse in US-Dollar seit 2020), beschreibend
+  const ddStats = (rows, a) => {
+    const x = rows.filter((r) => r.asset === a && Number(r.close) > 0).map((r) => [r.date, Number(r.close)]).sort((p, q) => (p[0] < q[0] ? -1 : 1));
+    if (x.length < 250) return null;
+    let hi = x[0][1], hiD = x[0][0], ph = null; const dd = [], phases = [];
+    for (const [d, c] of x) {
+      if (c >= hi) { if (ph && ph.tief <= -0.1) phases.push({ ...ph, ende: d }); ph = null; hi = c; hiD = d; dd.push(0); continue; }
+      const v = c / hi - 1; dd.push(v);
+      if (!ph) ph = { start: hiD, tief: v, tiefD: d }; else if (v < ph.tief) { ph.tief = v; ph.tiefD = d; }
+    }
+    const L = x[x.length - 1], cur = L[1] / hi - 1, days = (s, t) => Math.round((Date.parse(t) - Date.parse(s)) / 864e5);
+    const med = (v) => { const s = v.slice().sort((p, q) => p - q); return s.length ? s[Math.floor(s.length / 2)] : null; };
+    return { von: x[0][0], stand: L[0], kurs: L[1], ath: hi, athD: hiD, cur, seit: days(hiD, L[0]), anteil: dd.filter((v) => v <= cur).length / dd.length, n: phases.length,
+      tiefMed: med(phases.map((p) => p.tief)), tiefMax: Math.min(...phases.map((p) => p.tief), cur), dauerMed: med(phases.map((p) => days(p.start, p.ende))), mark: (q) => hi * (1 + q) };
+  };
+  const renderDD = () => {
+    const el = card('mx-dd', '#mx-baer', 'mx-card');
+    if (!el) return;
+    el.setAttribute('data-source', 'kurse_usd');
+    if (!ok(['kurse_usd'])) { wait(el, ['kurse_usd']); return; }
+    const rows = dash.data('kurse_usd').data, fd = (d) => d.slice(8, 10) + '.' + d.slice(5, 7) + '.' + d.slice(0, 4);
+    const usd = (v) => fmtN(v, v >= 1000 ? 0 : 2) + ' $';
+    const S = [['BTC', 'Bitcoin'], ['GOLD', 'Gold']].map(([a, n]) => [n, ddStats(rows, a)]).filter((z) => z[1]);
+    STAT.dd = S.map(([n, s]) => n + ' ' + pct(s.cur, 0)).join(' · ');
+    el.innerHTML = '<h3>Abstand zum Allzeithoch: Bitcoin und Gold</h3><p class="mk-sub">Wie tief liegt der Kurs unter dem bisherigen Höchststand, und wie oft war das seit 2020 schon so? Rückgangsphasen zählen ab 10 % unter dem Hoch bis zum nächsten neuen Hoch. Beschreibend, keine Prognose.</p>'
+      + S.map(([n, s]) => `<p><b>${n}</b>: ${pct(s.cur, 1)} unter dem Hoch von ${usd(s.ath)} (${fd(s.athD)}, vor ${s.seit} Tagen). ${s.anteil < 0.01 ? 'So tief lag der Kurs seit ' + fd(s.von) + ' noch nie.' : 'So tief oder tiefer lag der Kurs an ' + fmtN(s.anteil * 100, 0) + ' % aller Tage seit ' + fd(s.von) + '.'}</p>`
+        + `<div class="mk-scroll"><table class="mk-table"><thead><tr><th>Kennzahl</th><th>Wert</th></tr></thead><tbody>`
+        + `<tr><td>Rückgangsphasen ab 10 %</td><td>${s.n}${s.cur <= -0.1 ? ' (+ die laufende)' : ''}</td></tr>`
+        + `<tr><td>Typische Tiefe (Median)</td><td>${s.tiefMed == null ? '–' : pct(s.tiefMed, 0)} · Kurs dort ${s.tiefMed == null ? '–' : usd(s.mark(s.tiefMed))}</td></tr>`
+        + `<tr><td>Tiefster Rückgang seit 2020</td><td>${pct(s.tiefMax, 0)}</td></tr>`
+        + `<tr><td>Bis zum neuen Hoch (Median)</td><td>${s.dauerMed == null ? '–' : s.dauerMed + ' Tage'}</td></tr>`
+        + `<tr><td>Stand</td><td>${fd(s.stand)}, ${usd(s.kurs)}</td></tr></tbody></table></div>`).join('');
+  };
   const renderBaer = () => {
     const el = card('mx-baer', '#mx-rhythmus', 'mx-card');
     if (!el) return;
@@ -863,7 +896,7 @@
 
   // ---------- Bedienung: einklappbare Karten, Überblick, Sprungmarken ----------
   const OPEN = Object.assign({ 'mx-stress': true }, read('mk-open-v1', {}));
-  const FOLD = ['mx-lage', 'mx-konj', 'mx-zyk', 'mx-gesamt', 'mx-rsi', 'mx-stopp', 'mx-lang', 'mx-ag', 'mx-bg', 'mx-ki', 'mx-stress', 'mx-rhythmus', 'mx-baer', 'mx-real', 'pt-card', 'sim-card', 'muster-card'];
+  const FOLD = ['mx-lage', 'mx-konj', 'mx-zyk', 'mx-gesamt', 'mx-rsi', 'mx-stopp', 'mx-lang', 'mx-ag', 'mx-bg', 'mx-ki', 'mx-stress', 'mx-rhythmus', 'mx-baer', 'mx-real', 'mx-dd', 'pt-card', 'sim-card', 'muster-card'];
   const D = (id) => (ok([id]) ? dash.data(id).data : []);
   const SUM = {
     'mx-gesamt': () => { const R = D('gesamtbild').filter((r) => ageOf(r) < 3), n = (k) => R.filter((r) => r.konsens === k).length; return R.length ? `${n('einig aufwärts')} einig aufwärts, ${n('einig abwärts')} einig abwärts, ${n('offen') + n('uneinig')} offen` : ''; },
@@ -872,6 +905,7 @@
     'mx-lang': () => { const now = D('rueckgaenge_lang').find((r) => r.hoch === 'heute'), ch = D('cape_rueckblick').find((c) => c.heute); return (now ? 'heute ' + pct(now.tiefe, 1) + ' unter dem Hoch' : '') + (ch ? ' · Shiller-KGV ' + fmtN(ch.cape_heute, 1) : ''); },
     'mx-ag': () => { const R = D('aktien_gold'), now = R.find((r) => r.art === 'heute'), hi = R.filter((r) => r.art === 'hoch').pop(); return now ? fmtN(now.ratio, 2) + ' Unzen' + (hi ? ', ' + pct(now.ratio / hi.ratio - 1, 0) + ' seit dem Hoch ' + fdm(hi.date) : '') : ''; },
     'mx-bg': () => { const R = D('btc_gold'), now = R.find((r) => r.art === 'heute'); if (!now) return ''; const mx = R.reduce((m, r) => (r.ratio > m.ratio ? r : m), R[0]); return fmtN(now.ratio, 1) + ' Unzen, ' + pct(now.ratio / mx.ratio - 1, 0) + ' unter dem Hoch'; },
+    'mx-dd': () => STAT.dd || '',
     'mx-baer': () => { const a = D('sparplan_baer').find((r) => r.start === 'Am Rekordhoch 2021'); return a ? 'Start am Rekordhoch 2021: heute ' + pct(a.ergebnis, 0) : ''; },
     'mx-real': () => { const k = D('euro_real').find((r) => r.letzter && r.anlage === 'Konto ohne Zinsen'); return k ? 'Konto ohne Zinsen: noch ' + eur(k.real) + ' Kaufkraft' : ''; },
     'mx-rhythmus': () => 'Der Rhythmus ändert fast nichts',
@@ -961,7 +995,7 @@
     chFix();
   };
 
-  const all = () => { try { renderStrip(); } catch (e) { console.error(e); } for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderReal, renderRsi, renderStopp, renderStale, renderStrip, arrange, foldify]) { try { f(); } catch (e) { console.error(e); } } };
+  const all = () => { try { renderStrip(); } catch (e) { console.error(e); } for (const f of [renderLage, renderKonjunktur, renderZyklus, renderLangzeit, renderAktienGold, renderBtcGold, renderKi, renderGesamt, renderStress, renderRhythmus, renderBaer, renderDD, renderReal, renderRsi, renderStopp, renderStale, renderStrip, arrange, foldify]) { try { f(); } catch (e) { console.error(e); } } };
   dash.onData(all);
   const dp = $('#depot-out');
   if (dp && window.MutationObserver) { let t = null; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => { renderStress(); foldify(); }, 50); }).observe(dp, { childList: true }); }

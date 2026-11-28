@@ -19,9 +19,13 @@ for a in d['assets']:
     off=0;ds=[]
     for x in a['od']:
         off+=x; ds.append((D0+datetime.timedelta(days=off)).isoformat())
-    G[a['ticker']]=dict(zip(ds,a['c']))
+    c=a.get('c')
+    if c is None and a.get('cd') is not None:
+        f=10**(a.get('ce') or 0); t=0; c=[]
+        for x in a['cd']: t+=x; c.append(t/f)
+    G[a['ticker']]=dict(zip(ds,c or []))
 FILES={'kurse_usd.csv':{'BTC':'BTC-USD','ETH':'ETH-USD','SOL':'SOL-USD','XRP':'XRP-USD','DOGE':'DOGE-USD','GOLD':'GC=F','SILBER':'SI=F','PLATIN':'PL=F','SPX':'^GSPC'},
-'kurse_beob_usd.csv':{'ADA':'ADA-USD','LINK':'LINK-USD','AVAX':'AVAX-USD','BNB':'BNB-USD','NDX':'^NDX','NVDA':'NVDA','COIN':'COIN','AAPL':'AAPL','MSFT':'MSFT','AMZN':'AMZN','GOOGL':'GOOGL','PALLADIUM':'PA=F','DAX':'^GDAXI','EUNL':'EUNL.DE','SXR8':'SXR8.DE','MU':'MU','KO':'KO','MSTR':'MSTR','SPOT':'SPOT','ISRG':'ISRG','MELI':'MELI','CRWD':'CRWD','FSLR':'FSLR','NVO':'NVO','AVGO':'AVGO','NEAR':'NEAR-USD','HYPE':'HYPE32196-USD','POL':'POL28321-USD','ZEC':'ZEC-USD','IQQW':'IQQW.DE','EXX6':'EXX6.DE'},
+'kurse_beob_usd.csv':{'ADA':'ADA-USD','LINK':'LINK-USD','AVAX':'AVAX-USD','BNB':'BNB-USD','NDX':'^NDX','NVDA':'NVDA','COIN':'COIN','AAPL':'AAPL','MSFT':'MSFT','AMZN':'AMZN','GOOGL':'GOOGL','PALLADIUM':'PA=F','DAX':'^GDAXI','EUNL':'EUNL.DE','SXR8':'SXR8.DE','MU':'MU','KO':'KO','MSTR':'MSTR','SPOT':'SPOT','ISRG':'ISRG','MELI':'MELI','CRWD':'CRWD','FSLR':'FSLR','NVO':'NVO','AVGO':'AVGO','NEAR':'NEAR-USD','HYPE':'HYPE32196-USD','POL':'POL28321-USD','ZEC':'ZEC-USD','IQQW':'IQQW.DE','EXX6':'EXX6.DE','L8I3':'L8I3.DE','PRAR':'PRAR.DE','IUST':'IUST.DE','VGWD':'VGWD.DE','XMLC':'XMLC.DE','V9N':'V9N.DE','ETLX':'ETLX.DE','SXRV':'SXRV.DE'},
 'kurse_welt.csv':{'ATX':'^ATX','WIE':'WIE.VI','VER':'VER.VI','EBS':'EBS.VI','OMV':'OMV.VI','ANDR':'ANDR.VI','N225':'^N225','HSI':'^HSI','SSEC':'000001.SS','NIFTY':'^NSEI','SX5E':'^STOXX50E','RUT':'^RUT','WTI':'CL=F','BRENT':'BZ=F','KUPFER':'HG=F','ERDGAS':'NG=F','DXY':'DX-Y.NYB','US10Y':'^TNX','VIX':'^VIX','TSM':'TSM','BABA':'BABA','TENCENT':'0700.HK','ASML':'ASML.AS','SAP':'SAP.DE','TSLA':'TSLA','META':'META','LLY':'LLY','DOT':'DOT-USD','LTC':'LTC-USD','SUI':'SUI20947-USD','NESN':'NESN.SW','ALV':'ALV.DE','VOE':'VOE.VI','TON':'TON11419-USD','V':'V','RBI':'RBI.VI','TOYOTA':'7203.T','SONY':'6758.T','SAMSUNG':'005930.KS','KOSPI':'^KS11','FTSE':'^FTSE','CAC':'^FCHI','SMI':'^SSMI','DJI':'^DJI','LVMH':'MC.PA','SIE':'SIE.DE','SHEL':'SHEL.L','BRKB':'BRK-B','JPM':'JPM','NFLX':'NFLX','WEIZEN':'ZW=F','TRX':'TRX-USD','SHIB':'SHIB-USD','IS3N':'IS3N.DE','EUNA':'EUNA.DE'}}
 fmt=lambda v:('%.6f'%v).rstrip('0').rstrip('.')
 for fn,mp in FILES.items():
